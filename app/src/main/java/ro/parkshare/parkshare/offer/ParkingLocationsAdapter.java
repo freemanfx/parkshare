@@ -13,9 +13,11 @@ import ro.parkshare.parkshare.service.ParkingLocation;
 
 public class ParkingLocationsAdapter extends RecyclerView.Adapter<ParkingLocationsAdapter.ViewHolder> {
     private List<ParkingLocation> dataSet;
+    private OnItemClickListener itemClickListener;
 
-    public ParkingLocationsAdapter(List<ParkingLocation> dataSet) {
+    public ParkingLocationsAdapter(List<ParkingLocation> dataSet, OnItemClickListener itemClickListener) {
         this.dataSet = dataSet;
+        this.itemClickListener = itemClickListener;
         dataSet.add(new ParkingLocation(1L, "Piata Victoriei", 44.67, 27.33));
         dataSet.add(new ParkingLocation(1L, "Grozavesti", 44.67, 27.33));
         dataSet.add(new ParkingLocation(1L, "Aviatiei", 44.67, 27.33));
@@ -31,7 +33,11 @@ public class ParkingLocationsAdapter extends RecyclerView.Adapter<ParkingLocatio
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         ParkingLocation parkingLocation = dataSet.get(position);
+
+        holder.item = parkingLocation;
         holder.name.setText(parkingLocation.getName());
+
+        holder.bind(parkingLocation, itemClickListener);
     }
 
     @Override
@@ -44,13 +50,21 @@ public class ParkingLocationsAdapter extends RecyclerView.Adapter<ParkingLocatio
         notifyDataSetChanged();
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(ParkingLocation parkingLocation);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout view;
         public TextView name;
+        ParkingLocation item;
 
         ViewHolder(LinearLayout view) {
             super(view);
             name = view.findViewById(R.id.name);
+        }
+
+        void bind(ParkingLocation item, OnItemClickListener clickListener) {
+            itemView.setOnClickListener((view) -> clickListener.onItemClick(item));
         }
     }
 }

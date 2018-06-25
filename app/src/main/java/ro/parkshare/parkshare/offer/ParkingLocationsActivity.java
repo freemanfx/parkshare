@@ -30,13 +30,17 @@ public class ParkingLocationsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ParkingLocationsAdapter(new ArrayList<>());
+        adapter = new ParkingLocationsAdapter(new ArrayList<>(), this::onItemClickListener);
         recyclerView.setAdapter(adapter);
 
 //        ParkingService.getInstance()
 //                .getParkingLocationsForCurrentUser()
 //                .observeOn(mainThread())
 //                .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
+    }
+
+    private void onItemClickListener(ParkingLocation parkingLocation) {
+        Toast.makeText(this, parkingLocation.getName(), Toast.LENGTH_LONG).show();
     }
 
     private void displayParkingLocations(List<ParkingLocation> parkingLocations) {
