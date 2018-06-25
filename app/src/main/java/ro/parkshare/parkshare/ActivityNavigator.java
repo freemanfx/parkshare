@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import ro.parkshare.parkshare.find.FindMapsActivity;
+import ro.parkshare.parkshare.offer.ParkingLocationsActivity;
 
 
 public class ActivityNavigator {
@@ -12,7 +13,7 @@ public class ActivityNavigator {
     }
 
     public static void toOffer(AppCompatActivity activity) {
-
+        startActivity(activity, ParkingLocationsActivity.class);
     }
 
     private static void startActivity(AppCompatActivity activity, Class<?> activityClass) {

@@ -38,6 +38,7 @@
         <activity
             android:name=".find.FindMapsActivity"
             android:label="@string/title_activity_find_maps"></activity>
+        <activity android:name=".offer.ParkingLocationsActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"
