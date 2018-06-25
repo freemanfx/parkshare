@@ -22,8 +22,7 @@ public class ParkingLocationsAdapter extends RecyclerView.Adapter<ParkingLocatio
     public ParkingLocationsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.parking_locations_item, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -46,7 +45,7 @@ public class ParkingLocationsAdapter extends RecyclerView.Adapter<ParkingLocatio
         public LinearLayout view;
         public TextView name;
 
-        public ViewHolder(LinearLayout view) {
+        ViewHolder(LinearLayout view) {
             super(view);
             name = view.findViewById(R.id.name);
         }
