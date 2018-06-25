@@ -12,6 +12,9 @@ import java.util.List;
 
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.ParkingLocation;
+import ro.parkshare.parkshare.service.ParkingService;
+
+import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ParkingLocationsActivity extends AppCompatActivity {
 
@@ -33,10 +36,10 @@ public class ParkingLocationsActivity extends AppCompatActivity {
         adapter = new ParkingLocationsAdapter(new ArrayList<>(), this::onItemClickListener);
         recyclerView.setAdapter(adapter);
 
-//        ParkingService.getInstance()
-//                .getParkingLocationsForCurrentUser()
-//                .observeOn(mainThread())
-//                .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
+        ParkingService.getInstance()
+                .getParkingLocationsForCurrentUser()
+                .observeOn(mainThread())
+                .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
     }
 
     private void onItemClickListener(ParkingLocation parkingLocation) {
