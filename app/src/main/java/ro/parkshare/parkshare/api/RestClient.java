@@ -10,14 +10,15 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class OffersClient {
+public class RestClient {
 
     private static final String SERVER_BASE_URL = "https://demo5826679.mockable.io/";
 
-    private static OffersClient instance;
+    private static RestClient instance;
     private OffersAPI offersAPI;
+    private ParkingAPI parkingAPI;
 
-    private OffersClient() {
+    private RestClient() {
         final Gson gson =
                 new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
@@ -31,16 +32,21 @@ public class OffersClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         offersAPI = retrofit.create(OffersAPI.class);
+        parkingAPI = retrofit.create(ParkingAPI.class);
     }
 
-    public static OffersClient getInstance() {
+    public static RestClient getInstance() {
         if (instance == null) {
-            instance = new OffersClient();
+            instance = new RestClient();
         }
         return instance;
     }
 
-    public OffersAPI api() {
+    public OffersAPI offersAPI() {
         return offersAPI;
+    }
+
+    public ParkingAPI parkingAPI() {
+        return parkingAPI;
     }
 }

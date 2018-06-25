@@ -2,8 +2,9 @@
     <string name="app_name">ParkShare</string>
     <string name="find_parking_spot">Find parking spot</string>
     <string name="offer_parking_spot">Offer parking spot</string>
-    <string name="title_activity_find_maps">Find parking space</string>
+    <string name="title_activity_find_maps">Find parking location space</string>
     <string name="error_retrieve_offers">There was an error while retrieving offers: </string>
     <string name="expired">Expired</string>
     <string name="parking_validity_title">Available for %1$d minutes</string>
+    <string name="error_retrieve_parking_locations">There was an error while retrieving parking locations</string>
 </resources>

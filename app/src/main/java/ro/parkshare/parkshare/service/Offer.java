@@ -2,7 +2,7 @@ package ro.parkshare.parkshare.service;
 
 public class Offer {
     private Integer id;
-    private Parking parking;
+    private ParkingLocation parking;
     private Validity validity;
 
     public int getId() {
@@ -13,12 +13,12 @@ public class Offer {
         this.id = id;
     }
 
-    public Parking getParking() {
+    public ParkingLocation getParking() {
         return parking;
     }
 
-    public void setParking(Parking parking) {
-        this.parking = parking;
+    public void setParking(ParkingLocation parkingLocation) {
+        this.parking = parkingLocation;
     }
 
     public Validity getValidity() {

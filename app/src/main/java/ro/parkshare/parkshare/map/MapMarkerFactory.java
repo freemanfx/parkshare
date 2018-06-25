@@ -8,7 +8,7 @@ import java.util.List;
 
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.Offer;
-import ro.parkshare.parkshare.service.Parking;
+import ro.parkshare.parkshare.service.ParkingLocation;
 import rx.Observable;
 
 public class MapMarkerFactory {
@@ -33,10 +33,10 @@ public class MapMarkerFactory {
     }
 
     private MarkerOptions offerToMarker(Offer offer) {
-        Parking parking = offer.getParking();
+        ParkingLocation parkingLocation = offer.getParking();
         return new MarkerOptions()
                 .title(markerTitle(offer))
-                .position(parking.getLatLang());
+                .position(parkingLocation.getLatLang());
     }
 
     private String markerTitle(Offer offer) {
