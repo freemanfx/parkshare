@@ -20,7 +20,21 @@
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="noAnimTheme" parent="AppTheme">
+    <style name="noAnimTheme" parent="AppTheme"></style>
 
+    <style name="editText" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="label" parent="TextAppearance.AppCompat.Large">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="action_button" parent="Widget.AppCompat.ActionButton">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>

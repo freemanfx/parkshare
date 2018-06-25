@@ -6,11 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.ParkingLocation;
 import ro.parkshare.parkshare.service.ParkingService;
@@ -26,12 +28,11 @@ public class ParkingLocationsActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(getString(R.string.parking_locations_activity_title));
         setContentView(R.layout.activity_parking_locations);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view ->
-                Toast.makeText(ParkingLocationsActivity.this, "Add new Parking location activity", Toast.LENGTH_SHORT).show()
-        );
+        fab.setOnClickListener(this::addNewParkingLocation);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -46,6 +47,10 @@ public class ParkingLocationsActivity extends AppCompatActivity {
                 .getParkingLocationsForCurrentUser()
                 .observeOn(mainThread())
                 .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
+    }
+
+    private void addNewParkingLocation(View view) {
+        ActivityNavigator.addNewLocationActivity(this);
     }
 
     private void onItemClickListener(ParkingLocation parkingLocation) {
