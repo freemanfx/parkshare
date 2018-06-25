@@ -1,6 +1,7 @@
 package ro.parkshare.parkshare.find;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
@@ -15,11 +16,13 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.List;
 
+import ro.parkshare.parkshare.PermissionHelper;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.map.MapMarkerFactory;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 
+import static ro.parkshare.parkshare.PermissionHelper.RequestCode.LOCATION;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class FindMapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -40,6 +43,18 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
         map = googleMap;
         setupMap();
         setMapMoveListener();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (LOCATION.ordinal() == requestCode) {
+            if (PermissionHelper.grantedLocation(permissions, grantResults)) {
+                map.setMyLocationEnabled(true);
+            } else {
+                PermissionHelper.requestLocation(this);
+            }
+        }
     }
 
     private void setMapMoveListener() {
@@ -67,6 +82,11 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     private void setupMap() {
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        if (PermissionHelper.hasLocation(this)) {
+            map.setMyLocationEnabled(true);
+        } else {
+            PermissionHelper.requestLocation(this);
+        }
         setInitialPoint();
 
         UiSettings ui = map.getUiSettings();
