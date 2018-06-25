@@ -16,6 +16,9 @@ public class ParkingLocationsAdapter extends RecyclerView.Adapter<ParkingLocatio
 
     public ParkingLocationsAdapter(List<ParkingLocation> dataSet) {
         this.dataSet = dataSet;
+        dataSet.add(new ParkingLocation(1L, "Piata Victoriei", 44.67, 27.33));
+        dataSet.add(new ParkingLocation(1L, "Grozavesti", 44.67, 27.33));
+        dataSet.add(new ParkingLocation(1L, "Aviatiei", 44.67, 27.33));
     }
 
     @Override

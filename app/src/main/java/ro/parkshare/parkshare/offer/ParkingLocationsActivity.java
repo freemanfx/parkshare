@@ -7,14 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.ParkingLocation;
-import ro.parkshare.parkshare.service.ParkingService;
-
-import static java.util.Collections.emptyList;
-import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ParkingLocationsActivity extends AppCompatActivity {
 
@@ -27,19 +24,19 @@ public class ParkingLocationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_locations);
 
-        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ParkingLocationsAdapter(emptyList());
+        adapter = new ParkingLocationsAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
 
-        ParkingService.getInstance()
-                .getParkingLocationsForCurrentUser()
-                .observeOn(mainThread())
-                .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
+//        ParkingService.getInstance()
+//                .getParkingLocationsForCurrentUser()
+//                .observeOn(mainThread())
+//                .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
     }
 
     private void displayParkingLocations(List<ParkingLocation> parkingLocations) {
