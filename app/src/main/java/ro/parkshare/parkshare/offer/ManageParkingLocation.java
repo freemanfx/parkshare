@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,12 +27,13 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_parking_location);
+        setTitle(R.string.manage_parking_edit_title);
+
         name = findViewById(R.id.name);
         saveButton = findViewById(R.id.save);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(PARKING_ID)) {
-            viewMode();
             Long parkingId = extras.getLong(PARKING_ID);
             ParkingService.getInstance()
                     .getParkingLocationsForCurrentUser()
@@ -41,8 +41,6 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
                     .filter(p -> p.getId().equals(parkingId))
                     .first()
                     .subscribe(this::displayLocationOnMap, this::onErrorRetrievingParking);
-        } else {
-            addMode();
         }
 
         MapFragment mMapFragment = MapFragment.newInstance();
@@ -51,15 +49,6 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         fragmentTransaction.add(R.id.map, mMapFragment);
         fragmentTransaction.commit();
         mMapFragment.getMapAsync(this);
-    }
-
-    private void viewMode() {
-        setTitle(R.string.manage_parking_edit_title);
-        saveButton.setVisibility(ViewGroup.GONE);
-    }
-
-    private void addMode() {
-        setTitle(R.string.add_parking_location);
     }
 
     private void onErrorRetrievingParking(Throwable throwable) {

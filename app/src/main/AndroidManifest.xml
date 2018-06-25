@@ -40,6 +40,7 @@
             android:label="@string/title_activity_find_maps"></activity>
         <activity android:name=".offer.ParkingLocationsActivity" />
         <activity android:name=".offer.ManageParkingLocation" />
+        <activity android:name=".offer.AddParkingLocation" />
 
         <uses-library
             android:name="org.apache.http.legacy"
