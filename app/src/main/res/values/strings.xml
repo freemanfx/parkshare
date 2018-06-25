@@ -12,4 +12,5 @@
     <string name="Position">Position</string>
     <string name="enter_a_name_for_this_location">Enter a name for this location</string>
     <string name="save">Save</string>
+    <string name="manage_parking_edit_title">Manage parking</string>
 </resources>

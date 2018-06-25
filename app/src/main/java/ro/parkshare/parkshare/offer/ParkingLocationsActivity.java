@@ -54,7 +54,7 @@ public class ParkingLocationsActivity extends AppCompatActivity {
     }
 
     private void onItemClickListener(ParkingLocation parkingLocation) {
-        Toast.makeText(this, parkingLocation.getName(), Toast.LENGTH_LONG).show();
+        ActivityNavigator.manageLocation(this, parkingLocation);
     }
 
     private void displayParkingLocations(List<ParkingLocation> parkingLocations) {
