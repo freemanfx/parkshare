@@ -4,6 +4,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,11 @@ import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ManageParkingLocation extends AppCompatActivity implements OnMapReadyCallback {
     public static final String PARKING_ID = "PARKING_ID";
+    private static final String TAG = ManageParkingLocation.class.getName();
 
     private TextView name;
     private GoogleMap map;
+    private ParkingLocation parkingLocation;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
             ParkingService.getInstance()
                     .getParkingLocationById(parkingId)
                     .observeOn(mainThread())
-                    .subscribe(this::displayLocationOnMap, this::onErrorRetrievingParking);
+                    .subscribe(this::onLocationRetrieved, this::onErrorRetrievingParking);
         }
 
         MapFragment mMapFragment = MapFragment.newInstance();
@@ -53,16 +56,25 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
     }
 
     private void onErrorRetrievingParking(Throwable throwable) {
-        Toast.makeText(this, throwable.toString(), Toast.LENGTH_SHORT).show();
+        String message = throwable.toString();
+        Log.e(TAG, message, throwable);
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    private void displayLocationOnMap(ParkingLocation parkingLocation) {
+    private void onLocationRetrieved(ParkingLocation parkingLocation) {
         name.setText(parkingLocation.getName());
+        this.parkingLocation = parkingLocation;
 
-        MarkerOptions markerOptions = new MarkerOptions().position(parkingLocation.getLatLang());
-        map.addMarker(markerOptions);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(parkingLocation.getLatLang(), 20.0f);
-        map.moveCamera(cameraUpdate);
+        displayOnMap();
+    }
+
+    private void displayOnMap() {
+        if (map != null && parkingLocation != null) {
+            MarkerOptions markerOptions = new MarkerOptions().position(parkingLocation.getLatLang());
+            map.addMarker(markerOptions);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(parkingLocation.getLatLang(), 20.0f);
+            map.moveCamera(cameraUpdate);
+        }
     }
 
     @Override
@@ -73,5 +85,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         UiSettings ui = map.getUiSettings();
         ui.setAllGesturesEnabled(false);
         ui.setZoomControlsEnabled(true);
+
+        displayOnMap();
     }
 }

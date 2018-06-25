@@ -33,8 +33,10 @@
     </style>
 
     <style name="parking_name_location" parent="TextAppearance.AppCompat.Large">
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">@dimen/default_padding</item>
         <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="action_button" parent="Widget.AppCompat.ActionButton">
