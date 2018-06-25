@@ -34,4 +34,12 @@ public class ParkingService {
         long userId = 1L;
         return getAllParkingLocations(userId);
     }
+
+    public Observable<ParkingLocation> getParkingLocationById(Long parkingId) {
+        return ParkingService.getInstance()
+                .getParkingLocationsForCurrentUser()
+                .flatMapIterable(x -> x)
+                .filter(p -> p.getId().equals(parkingId))
+                .first();
+    }
 }
