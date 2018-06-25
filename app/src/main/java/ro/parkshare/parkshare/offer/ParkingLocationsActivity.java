@@ -2,6 +2,7 @@ package ro.parkshare.parkshare.offer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,11 @@ public class ParkingLocationsActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_locations);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view ->
+                Toast.makeText(ParkingLocationsActivity.this, "Add new Parking location activity", Toast.LENGTH_SHORT).show()
+        );
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
