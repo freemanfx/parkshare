@@ -1,8 +1,10 @@
 package ro.parkshare.parkshare.find;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -13,12 +15,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.List;
 
 import ro.parkshare.parkshare.PermissionHelper;
 import ro.parkshare.parkshare.R;
-import ro.parkshare.parkshare.map.MapMarkerFactory;
+import ro.parkshare.parkshare.map.MapHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 
@@ -27,6 +30,7 @@ import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class FindMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final String TAG = FindMapsActivity.class.getName();
     private GoogleMap map;
 
     @Override
@@ -45,6 +49,7 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
         setMapMoveListener();
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -72,14 +77,24 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
 
     private void displayOffers(List<Offer> offers) {
         map.clear();
-        MapMarkerFactory.getInstance(this)
-                .fromOffers(offers)
-                .observeOn(mainThread())
-                .subscribe(map::addMarker);
+        MapHelper.displayOffers(offers, map)
+                .subscribe(marker -> {
+
+                }, this::onAddMarkerError);
     }
 
+    private void onAddMarkerError(Throwable throwable) {
+        Log.e(TAG, getString(R.string.error_adding_marker), throwable);
+    }
+
+    @SuppressLint("MissingPermission")
     private void setupMap() {
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+        map.setInfoWindowAdapter(new MarkerInfoWindowAdapter(this));
+        map.setOnInfoWindowClickListener(this::onInfoWindowClick);
+        map.setOnMarkerClickListener(this::onMarkerClick);
+
         if (PermissionHelper.hasLocation(this)) {
             map.setMyLocationEnabled(true);
         } else {
@@ -98,5 +113,15 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
         float zoomLevel = 19.0f;
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(bucuresti, zoomLevel);
         map.moveCamera(cameraUpdate);
+    }
+
+
+    public void onInfoWindowClick(Marker marker) {
+        // handle buying offer
+    }
+
+    public boolean onMarkerClick(Marker marker) {
+        marker.showInfoWindow();
+        return true;
     }
 }
