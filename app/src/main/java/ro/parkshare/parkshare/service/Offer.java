@@ -2,7 +2,9 @@ package ro.parkshare.parkshare.service;
 
 import com.google.gson.annotations.Expose;
 
-public class Offer {
+import java.io.Serializable;
+
+public class Offer implements Serializable {
 
     @Expose
     private Integer id;

@@ -42,4 +42,11 @@ public class ParkingService {
                 .filter(p -> p.getId().equals(parkingId))
                 .first();
     }
+
+    public Observable<Offer> bookOffer(Offer offer) {
+        //TODO: make api call
+        return Observable
+                .just(offer)
+                .subscribeOn(io());
+    }
 }

@@ -29,8 +29,9 @@ import static ro.parkshare.parkshare.helper.PermissionHelper.RequestCode.LOCATIO
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class FindMapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
     private static final String TAG = FindMapsActivity.class.getName();
+    private static final String TAKE_OFFER_DIALOG_TAG = "TakeOfferDialog";
+
     private GoogleMap map;
 
     @Override
@@ -117,7 +118,13 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
 
 
     public void onInfoWindowClick(Marker marker) {
-        // handle buying offer
+        TakeOfferDialog takeOfferDialog = new TakeOfferDialog();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(TakeOfferDialog.OFFER_KEY, (Offer) marker.getTag());
+        takeOfferDialog.setArguments(bundle);
+
+        takeOfferDialog.show(getSupportFragmentManager(), TAKE_OFFER_DIALOG_TAG);
     }
 
     public boolean onMarkerClick(Marker marker) {

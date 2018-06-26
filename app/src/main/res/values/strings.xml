@@ -25,4 +25,7 @@
     <string name="error_retrieve_data">There was an error while trying to retrieve data</string>
     <string name="error_sending_data">There was an error while trying to send data</string>
     <string name="offer_added">Offer has been added</string>
+    <string name="cancel">Cancel</string>
+    <string name="park_here">Park here</string>
+    <string name="booked_offer">Booked offer successfully</string>
 </resources>

@@ -26,4 +26,7 @@
     <string name="error_retrieve_data">S-a produs o eroare la obținere date</string>
     <string name="error_sending_data">S-a produs o eroare la trimiterea datelor</string>
     <string name="offer_added">Ofertă adăugată</string>
+    <string name="park_here">Parchează aici</string>
+    <string name="cancel">Anulează</string>
+    <string name="booked_offer">Parcare rezervată cu success!</string>
 </resources>
