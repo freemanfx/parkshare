@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,19 +20,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
-import ro.parkshare.parkshare.helper.ErrorHelper;
 import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.ParkingLocation;
 import ro.parkshare.parkshare.service.ParkingService;
 
 import static java.util.Collections.emptyList;
+import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ManageParkingLocation extends AppCompatActivity implements OnMapReadyCallback {
     public static final String PARKING_ID = "PARKING_ID";
     private static final String TAG = ManageParkingLocation.class.getName();
-
-    private ErrorHelper errorHelper = ErrorHelper.with(this);
 
     private GoogleMap map;
     private ParkingLocation parkingLocation;
@@ -89,7 +86,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
     private void onErrorRetrievingParking(Throwable throwable) {
         String message = throwable.toString();
         Log.e(TAG, message, throwable);
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        errorHelper(this).longToast(R.string.error_retrieve_data, throwable);
     }
 
     private void onLocationRetrieved(ParkingLocation parkingLocation) {
@@ -109,7 +106,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         OffersService.getInstance()
                 .getOffersByParkingId(parkingLocation.getId())
                 .observeOn(mainThread())
-                .subscribe(offersAdapter::replaceData, throwable -> errorHelper.longToast("Error while retrieving offers", throwable));
+                .subscribe(offersAdapter::replaceData, throwable -> errorHelper(this).longToast("Error while retrieving offers", throwable));
     }
 
     private void displayOnMap() {

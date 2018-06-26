@@ -53,6 +53,26 @@
             tools:text="21 May 08:00" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/duration_label"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration" />
+
+        <TextView
+            android:id="@+id/duration_text"
+            style="@style/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="60 minutes" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/add_offer"
         style="@style/action_button"

@@ -1,12 +1,24 @@
 package ro.parkshare.parkshare.service;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.Date;
 
 public class Validity {
     private static final int MILLIS_IN_A_MINUTE = 1000 * 60;
 
+    @Expose
     private Date start;
+    @Expose
     private Date end;
+
+    public Validity() {
+    }
+
+    public Validity(Date start, Date end) {
+        this.start = start;
+        this.end = end;
+    }
 
     public Date getStart() {
         return start;

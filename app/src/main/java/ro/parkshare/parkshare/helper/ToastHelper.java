@@ -11,11 +11,10 @@ public class ToastHelper {
     }
 
     public static ToastHelper of(Context context) {
-        ToastHelper toastHelper = new ToastHelper(context);
-        return toastHelper;
+        return new ToastHelper(context);
     }
 
     public void show(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG);
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 }

@@ -1,9 +1,20 @@
 package ro.parkshare.parkshare.service;
 
+import com.google.gson.annotations.Expose;
+
 public class Offer {
+
+    @Expose
     private Integer id;
+    @Expose
     private ParkingLocation parking;
+    @Expose
     private Validity validity;
+
+    public Offer(ParkingLocation parking, Validity validity) {
+        this.parking = parking;
+        this.validity = validity;
+    }
 
     public int getId() {
         return id;
