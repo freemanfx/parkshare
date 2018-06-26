@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ParkShare</string>
+    <string name="find_parking_spot">Caută loc de parcare</string>
+    <string name="offer_parking_spot">Oferă loc de parcare</string>
+    <string name="title_activity_find_maps">Caută loc de parcare</string>
+    <string name="error_retrieve_offers">S-a produs o eroare la obținerea ofertelor</string>
+    <string name="expired">Expirat</string>
+    <string name="parking_validity_title">Disponibil pentru %1$d minute</string>
+    <string name="error_retrieve_parking_locations">S-a produs o eroare la obținerea locurilor de parcare</string>
+    <string name="parking_locations_activity_title">Administrează locuri de parcare</string>
+    <string name="add_parking_location">Adaugă loc de parcare</string>
+    <string name="Position">Localizare</string>
+    <string name="enter_a_name_for_this_location">Introdu un nume pentru locație</string>
+    <string name="save">Salvează</string>
+    <string name="manage_parking_edit_title">Administrează parcare</string>
+    <string name="error_adding_marker">S-a produs eroare la adăugare marcaj</string>
+    <string name="offers">Oferte</string>
+    <string name="validity">Valabilitate</string>
+    <string name="from">De la:</string>
+    <string name="to">La:</string>
+    <string name="add_offer_activity_title">Adaugă ofertă</string>
+    <string name="add_offer">Adaugă ofertă</string>
+    <string name="duration">Durată:</string>
+    <string name="amount_minutes_format">%1$d minute</string>
+    <string name="error_retrieve_data">S-a produs o eroare la obținere date</string>
+    <string name="error_sending_data">S-a produs o eroare la trimiterea datelor</string>
+    <string name="offer_added">Ofertă adăugată</string>
+</resources>
