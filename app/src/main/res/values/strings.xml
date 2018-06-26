@@ -15,4 +15,7 @@
     <string name="manage_parking_edit_title">Manage parking</string>
     <string name="error_adding_marker">Error while adding marker</string>
     <string name="offers">Offers</string>
+    <string name="validity">Validity</string>
+    <string name="from">From:</string>
+    <string name="to">To:</string>
 </resources>

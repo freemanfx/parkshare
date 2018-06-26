@@ -23,6 +23,7 @@ public class OffersService {
     }
 
     public Observable<List<Offer>> getOffersForBounds(LatLngBounds bounds) {
+        //TODO: replace with proper api call
         Observable<List<Offer>> observable = RestClient
                 .getInstance()
                 .offersAPI()
@@ -30,5 +31,13 @@ public class OffersService {
                 .subscribeOn(io());
 
         return observable;
+    }
+
+    public Observable<List<Offer>> getOffersByParkingId(Long parkingId) {
+        //TODO: replace with proper api call
+        return RestClient.getInstance()
+                .offersAPI()
+                .getAll()
+                .subscribeOn(io());
     }
 }
