@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare.map;
+package ro.parkshare.parkshare.helper;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;

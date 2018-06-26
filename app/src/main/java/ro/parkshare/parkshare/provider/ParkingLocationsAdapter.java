@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare.offer;
+package ro.parkshare.parkshare.provider;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

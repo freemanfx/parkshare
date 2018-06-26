@@ -32,11 +32,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".find.FindMapsActivity"
+            android:name=".consumer.FindMapsActivity"
             android:label="@string/title_activity_find_maps"></activity>
-        <activity android:name=".offer.ParkingLocationsActivity" />
-        <activity android:name=".offer.ManageParkingLocation" />
-        <activity android:name=".offer.AddParkingLocation" />
+        <activity android:name=".provider.ParkingLocationsActivity" />
+        <activity android:name=".provider.ManageParkingLocation" />
+        <activity android:name=".provider.AddParkingLocation" />
 
         <uses-library
             android:name="org.apache.http.legacy"

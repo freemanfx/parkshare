@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare.offer;
+package ro.parkshare.parkshare.provider;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
@@ -19,11 +19,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ro.parkshare.parkshare.ActivityNavigator;
-import ro.parkshare.parkshare.PermissionHelper;
 import ro.parkshare.parkshare.R;
+import ro.parkshare.parkshare.helper.PermissionHelper;
 import ro.parkshare.parkshare.service.ParkingLocation;
 
-import static ro.parkshare.parkshare.PermissionHelper.RequestCode.LOCATION;
+import static ro.parkshare.parkshare.helper.PermissionHelper.RequestCode.LOCATION;
 
 public class AddParkingLocation extends AppCompatActivity implements OnMapReadyCallback {
 

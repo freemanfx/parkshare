@@ -3,10 +3,10 @@ package ro.parkshare.parkshare;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
-import ro.parkshare.parkshare.find.FindMapsActivity;
-import ro.parkshare.parkshare.offer.AddParkingLocation;
-import ro.parkshare.parkshare.offer.ManageParkingLocation;
-import ro.parkshare.parkshare.offer.ParkingLocationsActivity;
+import ro.parkshare.parkshare.consumer.FindMapsActivity;
+import ro.parkshare.parkshare.provider.AddParkingLocation;
+import ro.parkshare.parkshare.provider.ManageParkingLocation;
+import ro.parkshare.parkshare.provider.ParkingLocationsActivity;
 import ro.parkshare.parkshare.service.ParkingLocation;
 
 

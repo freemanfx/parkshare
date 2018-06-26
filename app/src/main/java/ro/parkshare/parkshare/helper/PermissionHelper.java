@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare;
+package ro.parkshare.parkshare.helper;
 
 import android.app.Activity;
 import android.content.Context;

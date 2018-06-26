@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare.offer;
+package ro.parkshare.parkshare.provider;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare.offer;
+package ro.parkshare.parkshare.provider;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
