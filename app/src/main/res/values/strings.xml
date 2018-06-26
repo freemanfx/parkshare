@@ -18,4 +18,6 @@
     <string name="validity">Validity</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
+    <string name="add_offer_activity_title">Add offer</string>
+    <string name="add_offer">Add offer</string>
 </resources>

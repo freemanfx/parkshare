@@ -37,6 +37,7 @@
         <activity android:name=".provider.ParkingLocationsActivity" />
         <activity android:name=".provider.ManageParkingLocation" />
         <activity android:name=".provider.AddParkingLocation" />
+        <activity android:name=".provider.AddOfferActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

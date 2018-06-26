@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import ro.parkshare.parkshare.consumer.FindMapsActivity;
+import ro.parkshare.parkshare.provider.AddOfferActivity;
 import ro.parkshare.parkshare.provider.AddParkingLocation;
 import ro.parkshare.parkshare.provider.ManageParkingLocation;
 import ro.parkshare.parkshare.provider.ParkingLocationsActivity;
@@ -32,6 +33,12 @@ public class ActivityNavigator {
     public static void manageLocation(AppCompatActivity activity, ParkingLocation parkingLocation) {
         Intent intent = new Intent(activity, ManageParkingLocation.class);
         intent.putExtra(ManageParkingLocation.PARKING_ID, parkingLocation.getId());
+        activity.startActivity(intent);
+    }
+
+    public static void addOfferForLocation(AppCompatActivity activity, ParkingLocation parkingLocation) {
+        Intent intent = new Intent(activity, AddOfferActivity.class);
+        intent.putExtra(AddOfferActivity.PARKING_ID, parkingLocation.getId());
         activity.startActivity(intent);
     }
 }

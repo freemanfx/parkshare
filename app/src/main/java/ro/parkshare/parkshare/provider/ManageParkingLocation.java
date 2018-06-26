@@ -19,6 +19,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.helper.ErrorHelper;
 import ro.parkshare.parkshare.service.OffersService;
@@ -52,7 +53,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
     }
 
     private void onAddOfferFabClickListener(View view) {
-        Toast.makeText(this, "Fab", Toast.LENGTH_LONG).show();
+        ActivityNavigator.addOfferForLocation(this, parkingLocation);
     }
 
     private void setupGoogleMaps() {
