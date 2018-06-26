@@ -3,6 +3,9 @@ package ro.parkshare.parkshare.provider;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,18 +19,24 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ro.parkshare.parkshare.R;
+import ro.parkshare.parkshare.helper.ErrorHelper;
+import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.ParkingLocation;
 import ro.parkshare.parkshare.service.ParkingService;
 
+import static java.util.Collections.emptyList;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ManageParkingLocation extends AppCompatActivity implements OnMapReadyCallback {
     public static final String PARKING_ID = "PARKING_ID";
     private static final String TAG = ManageParkingLocation.class.getName();
 
+    private ErrorHelper errorHelper = ErrorHelper.with(this);
+
     private TextView name;
     private GoogleMap map;
     private ParkingLocation parkingLocation;
+    private OffersAdapter offersAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +45,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         setTitle(R.string.manage_parking_edit_title);
 
         name = findViewById(R.id.name);
+        setUpRecyclerView();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(PARKING_ID)) {
@@ -55,6 +65,15 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         googleMapFragment.getMapAsync(this);
     }
 
+    private void setUpRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        offersAdapter = new OffersAdapter(this, emptyList());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(offersAdapter);
+    }
+
     private void onErrorRetrievingParking(Throwable throwable) {
         String message = throwable.toString();
         Log.e(TAG, message, throwable);
@@ -66,15 +85,14 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         this.parkingLocation = parkingLocation;
 
         displayOnMap();
-        addOffersFragment();
+        showOffers();
     }
 
-    private void addOffersFragment() {
-        OffersManagementFragment omf = OffersManagementFragment.newInstance(parkingLocation.getId());
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.offers_container, omf)
-                .commit();
+    private void showOffers() {
+        OffersService.getInstance()
+                .getOffersByParkingId(parkingLocation.getId())
+                .observeOn(mainThread())
+                .subscribe(offersAdapter::replaceData, throwable -> errorHelper.longToast("Error while retrieving offers", throwable));
     }
 
     private void displayOnMap() {
