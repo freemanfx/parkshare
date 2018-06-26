@@ -91,6 +91,7 @@ public class AddOfferActivity extends AppCompatActivity {
     }
 
     private void offerSaved(Offer offer) {
-        ToastHelper.of(this).show("Saved");
+        ToastHelper.of(this).show(getString(R.string.offer_added));
+        finish();
     }
 }
