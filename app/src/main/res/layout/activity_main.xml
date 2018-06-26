@@ -8,14 +8,18 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingTop="60dp"
+    android:weightSum="4"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/findModeButton"
         style="@style/mainBtn"
+        android:layout_marginBottom="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorPrimary"
         android:text="@string/find_parking_spot" />
 
     <Button
