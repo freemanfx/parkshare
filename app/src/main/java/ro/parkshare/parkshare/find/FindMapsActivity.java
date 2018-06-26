@@ -51,8 +51,6 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
         if (LOCATION.ordinal() == requestCode) {
             if (PermissionHelper.grantedLocation(permissions, grantResults)) {
                 map.setMyLocationEnabled(true);
-            } else {
-                PermissionHelper.requestLocation(this);
             }
         }
     }

@@ -6,7 +6,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
-import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.ParkingLocation;
 import rx.Observable;
@@ -35,16 +34,6 @@ public class MapMarkerFactory {
     private MarkerOptions offerToMarker(Offer offer) {
         ParkingLocation parkingLocation = offer.getParking();
         return new MarkerOptions()
-                .title(markerTitle(offer))
                 .position(parkingLocation.getLatLang());
-    }
-
-    private String markerTitle(Offer offer) {
-        int minutes = offer.getValidity().minutes();
-        if (minutes > 0) {
-            return context.getString(R.string.parking_validity_title, minutes);
-        } else {
-            return context.getString(R.string.expired);
-        }
     }
 }

@@ -56,8 +56,6 @@ public class AddParkingLocation extends AppCompatActivity implements OnMapReadyC
         if (LOCATION.ordinal() == requestCode) {
             if (PermissionHelper.grantedLocation(permissions, grantResults)) {
                 map.setMyLocationEnabled(true);
-            } else {
-                PermissionHelper.requestLocation(this);
             }
         }
     }
