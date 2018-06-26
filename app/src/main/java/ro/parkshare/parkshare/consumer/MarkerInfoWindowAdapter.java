@@ -1,4 +1,4 @@
-package ro.parkshare.parkshare.find;
+package ro.parkshare.parkshare.consumer;
 
 import android.content.Context;
 import android.view.LayoutInflater;
