@@ -32,6 +32,10 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="offer_card_label" parent="label">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
     <style name="parking_name_location" parent="TextAppearance.AppCompat.Large">
         <item name="android:padding">@dimen/default_padding</item>
         <item name="android:textSize">22sp</item>
