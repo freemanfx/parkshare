@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,6 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
 
     private ErrorHelper errorHelper = ErrorHelper.with(this);
 
-    private TextView name;
     private GoogleMap map;
     private ParkingLocation parkingLocation;
     private OffersAdapter offersAdapter;
@@ -44,9 +44,28 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         setContentView(R.layout.activity_manage_parking_location);
         setTitle(R.string.manage_parking_edit_title);
 
-        name = findViewById(R.id.name);
         setUpRecyclerView();
+        retrieveParkingLocation();
+        setupGoogleMaps();
+        View addOfferFab = findViewById(R.id.fab);
+        addOfferFab.setOnClickListener(this::onAddOfferFabClickListener);
+    }
 
+    private void onAddOfferFabClickListener(View view) {
+        Toast.makeText(this, "Fab", Toast.LENGTH_LONG).show();
+    }
+
+    private void setupGoogleMaps() {
+        SupportMapFragment googleMapFragment = SupportMapFragment.newInstance();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.map, googleMapFragment)
+                .commit();
+        googleMapFragment.getMapAsync(this);
+    }
+
+    private void retrieveParkingLocation() {
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(PARKING_ID)) {
             Long parkingId = extras.getLong(PARKING_ID);
@@ -55,14 +74,6 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
                     .observeOn(mainThread())
                     .subscribe(this::onLocationRetrieved, this::onErrorRetrievingParking);
         }
-
-        SupportMapFragment googleMapFragment = SupportMapFragment.newInstance();
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.map, googleMapFragment)
-                .commit();
-        googleMapFragment.getMapAsync(this);
     }
 
     private void setUpRecyclerView() {
@@ -81,11 +92,16 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
     }
 
     private void onLocationRetrieved(ParkingLocation parkingLocation) {
-        name.setText(parkingLocation.getName());
         this.parkingLocation = parkingLocation;
 
+        setNameText(parkingLocation);
         displayOnMap();
         showOffers();
+    }
+
+    private void setNameText(ParkingLocation parkingLocation) {
+        TextView name = findViewById(R.id.name);
+        name.setText(parkingLocation.getName());
     }
 
     private void showOffers() {
