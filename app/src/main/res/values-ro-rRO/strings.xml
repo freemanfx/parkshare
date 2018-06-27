@@ -10,7 +10,7 @@
     <string name="error_retrieve_parking_locations">S-a produs o eroare la obținerea locurilor de parcare</string>
     <string name="parking_locations_activity_title">Administrează locuri de parcare</string>
     <string name="add_parking_location">Adaugă loc de parcare</string>
-    <string name="Position">Localizare</string>
+    <string name="position">Localizare</string>
     <string name="enter_a_name_for_this_location">Introdu un nume pentru locație</string>
     <string name="save">Salvează</string>
     <string name="manage_parking_edit_title">Administrează loc parcare</string>
@@ -30,4 +30,7 @@
     <string name="cancel">Anulează</string>
     <string name="booked_offer">Parcare rezervată cu success!</string>
     <string name="your_car_parked_here">Mașina ta este parcată aici</string>
+    <string name="starting">Începand de la ora:</string>
+    <string name="parking_duration">Timp staționare:</string>
+    <string name="leave_parking">Eliberează locul</string>
 </resources>

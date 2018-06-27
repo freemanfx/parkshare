@@ -10,7 +10,7 @@
     <string name="error_retrieve_parking_locations">There was an error while retrieving parking locations</string>
     <string name="parking_locations_activity_title">Manage parking locations</string>
     <string name="add_parking_location">Add parking location</string>
-    <string name="Position">Position</string>
+    <string name="position">Position</string>
     <string name="enter_a_name_for_this_location">Enter a name for this location</string>
     <string name="save">Save</string>
     <string name="manage_parking_edit_title">Manage parking</string>
@@ -30,4 +30,7 @@
     <string name="park_here">Park here</string>
     <string name="booked_offer">Booked offer successfully</string>
     <string name="your_car_parked_here">Your car is parked here</string>
+    <string name="starting">Starting from:</string>
+    <string name="parking_duration">Parking duration</string>
+    <string name="leave_parking">Leave parking</string>
 </resources>
