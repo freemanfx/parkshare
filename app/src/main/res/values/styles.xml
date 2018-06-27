@@ -16,6 +16,10 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="leave_parking_button" parent="mainBtn">
+        <item name="android:background">@color/colorRed</item>
+    </style>
+
     <style name="offer_dialog_btn" parent="mainBtn">
         <item name="android:background">@color/colorPrimaryDark</item>
     </style>
