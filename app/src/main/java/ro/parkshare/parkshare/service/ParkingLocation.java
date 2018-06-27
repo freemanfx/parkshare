@@ -2,7 +2,9 @@ package ro.parkshare.parkshare.service;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class ParkingLocation {
+import java.io.Serializable;
+
+public class ParkingLocation implements Serializable {
     private Long id;
     private String name;
     private Double latitude;

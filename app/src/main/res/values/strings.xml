@@ -29,4 +29,5 @@
     <string name="cancel">Cancel</string>
     <string name="park_here">Park here</string>
     <string name="booked_offer">Booked offer successfully</string>
+    <string name="your_car_parked_here">Your car is parked here</string>
 </resources>

@@ -29,4 +29,5 @@
     <string name="park_here">Parchează aici</string>
     <string name="cancel">Anulează</string>
     <string name="booked_offer">Parcare rezervată cu success!</string>
+    <string name="your_car_parked_here">Mașina ta este parcată aici</string>
 </resources>

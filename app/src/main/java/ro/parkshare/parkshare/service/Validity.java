@@ -2,9 +2,10 @@ package ro.parkshare.parkshare.service;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Validity {
+public class Validity implements Serializable {
     private static final int MILLIS_IN_A_MINUTE = 1000 * 60;
 
     @Expose
