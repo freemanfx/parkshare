@@ -13,7 +13,7 @@
     <string name="Position">Localizare</string>
     <string name="enter_a_name_for_this_location">Introdu un nume pentru locație</string>
     <string name="save">Salvează</string>
-    <string name="manage_parking_edit_title">Administrează parcare</string>
+    <string name="manage_parking_edit_title">Administrează loc parcare</string>
     <string name="error_adding_marker">S-a produs eroare la adăugare marcaj</string>
     <string name="offers">Oferte</string>
     <string name="validity">Valabilitate</string>
