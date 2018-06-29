@@ -25,4 +25,7 @@ public interface OffersAPI {
 
     @POST("offers")
     Observable<Offer> saveOffer(@Body Offer offer);
+
+    @GET("offers/parking/{parkingId}")
+    Observable<List<Offer>> getByParkingId(@Path("parkingId") Long parkingId);
 }

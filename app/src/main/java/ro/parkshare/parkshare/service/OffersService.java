@@ -36,9 +36,8 @@ public class OffersService {
     }
 
     public Observable<List<Offer>> getOffersByParkingId(Long parkingId) {
-        //TODO: replace errorHelper proper api call
         return api
-                .getAll()
+                .getByParkingId(parkingId)
                 .subscribeOn(io());
     }
 
