@@ -43,10 +43,15 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         setTitle(R.string.manage_parking_edit_title);
 
         setUpRecyclerView();
-        retrieveParkingLocation();
         setupGoogleMaps();
         View addOfferFab = findViewById(R.id.fab);
         addOfferFab.setOnClickListener(this::onAddOfferFabClickListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveParkingLocation();
     }
 
     private void onAddOfferFabClickListener(View view) {
@@ -65,7 +70,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
 
     private void retrieveParkingLocation() {
         Bundle extras = getIntent().getExtras();
-        if (extras != null && extras.containsKey(PARKING_ID)) {
+        if (extras != null) {
             Long parkingId = extras.getLong(PARKING_ID);
             ParkingService.getInstance()
                     .getParkingLocationById(parkingId)
