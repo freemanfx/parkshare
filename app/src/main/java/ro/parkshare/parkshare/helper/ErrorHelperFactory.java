@@ -2,9 +2,13 @@ package ro.parkshare.parkshare.helper;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
+import android.util.Log;
 import android.widget.Toast;
 
+import ro.parkshare.parkshare.ParkShareApp;
+
 public class ErrorHelperFactory {
+    private static final String TAG = ParkShareApp.class.getName();
 
     private Context context;
 
@@ -17,11 +21,12 @@ public class ErrorHelperFactory {
     }
 
     public void longToast(String message, Throwable throwable) {
+        Log.e(TAG, message, throwable);
         Toast.makeText(context, message + throwable.toString(), Toast.LENGTH_LONG).show();
     }
 
     public void longToast(@StringRes int resId, Throwable throwable) {
         String message = context.getString(resId);
-        Toast.makeText(context, message + ": " + throwable.toString(), Toast.LENGTH_LONG).show();
+        longToast(message, throwable);
     }
 }

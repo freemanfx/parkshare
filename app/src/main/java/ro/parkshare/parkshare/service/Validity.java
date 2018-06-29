@@ -13,7 +13,7 @@ public class Validity implements Serializable {
     @Expose
     private Date end;
 
-    public Validity() {
+    private Validity() {
     }
 
     public Validity(Date start, Date end) {

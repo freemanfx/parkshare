@@ -9,10 +9,11 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ro.parkshare.parkshare.Constants;
 
 public class RestClient {
-
-    private static final String SERVER_BASE_URL = "https://demo5826679.mockable.io/";
+    private static final String SERVER_BASE_URL = Constants.SERVER_URL;
+    private static final String JAVA_DATE_FORMAT_WITH_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ss";
 
     private static RestClient instance;
     private OffersAPI offersAPI;
@@ -20,7 +21,10 @@ public class RestClient {
 
     private RestClient() {
         final Gson gson =
-                new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+                new GsonBuilder()
+                        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                        .setDateFormat(JAVA_DATE_FORMAT_WITH_TIME_ZONE)
+                        .create();
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

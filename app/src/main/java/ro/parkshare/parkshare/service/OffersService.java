@@ -4,6 +4,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.List;
 
+import retrofit2.Response;
 import ro.parkshare.parkshare.api.OffersAPI;
 import ro.parkshare.parkshare.api.RestClient;
 import rx.Observable;
@@ -41,7 +42,9 @@ public class OffersService {
                 .subscribeOn(io());
     }
 
-    public Observable<Offer> saveOffer(Offer offer) {
-        return api.saveOffer(offer).subscribeOn(io());
+    public Observable<Void> saveOffer(Offer offer) {
+        return api.saveOffer(offer)
+                .map(Response::body)
+                .subscribeOn(io());
     }
 }

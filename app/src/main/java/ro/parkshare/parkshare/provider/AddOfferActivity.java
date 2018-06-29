@@ -90,7 +90,7 @@ public class AddOfferActivity extends AppCompatActivity {
                         e -> errorHelper(this).longToast(R.string.error_sending_data, e));
     }
 
-    private void offerSaved(Offer offer) {
+    private void offerSaved(Void response) {
         ToastHelper.of(this).show(getString(R.string.offer_added));
         finish();
     }
