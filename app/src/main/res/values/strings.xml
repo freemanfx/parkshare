@@ -33,4 +33,5 @@
     <string name="starting">Starting from:</string>
     <string name="parking_duration">Parking duration</string>
     <string name="leave_parking">Leave parking</string>
+    <string name="error_save_location">There was an error while trying to save parking</string>
 </resources>

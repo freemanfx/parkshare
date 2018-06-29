@@ -1,23 +1,29 @@
 package ro.parkshare.parkshare.service;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class ParkingLocation implements Serializable {
     private Long id;
+    @Expose
     private String name;
     private Double latitude;
     private Double longitude;
+    @Expose
+    @SerializedName("userId")
+    private Long userId;
 
-    public ParkingLocation() {
+    private ParkingLocation() {
     }
 
-    public ParkingLocation(Long id, String name, Double latitude, Double longitude) {
-        this.id = id;
+    public ParkingLocation(String name, Double latitude, Double longitude, Long userId) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.userId = userId;
     }
 
     public Long getId() {

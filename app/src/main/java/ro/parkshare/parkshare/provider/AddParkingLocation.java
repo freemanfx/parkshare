@@ -22,7 +22,10 @@ import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.helper.PermissionHelper;
 import ro.parkshare.parkshare.service.ParkingLocation;
+import ro.parkshare.parkshare.service.ParkingService;
 
+import static ro.parkshare.parkshare.BeanProvider.userService;
+import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static ro.parkshare.parkshare.helper.PermissionHelper.RequestCode.LOCATION;
 
 public class AddParkingLocation extends AppCompatActivity implements OnMapReadyCallback {
@@ -64,7 +67,6 @@ public class AddParkingLocation extends AppCompatActivity implements OnMapReadyC
         String nameText = name.getText().toString();
         if (!nameText.isEmpty()) {
             storeParking(nameText);
-            ActivityNavigator.toOffer(this);
         } else {
             Snackbar.make(saveButton, "Please enter a name for the location", Snackbar.LENGTH_LONG).show();
         }
@@ -72,10 +74,16 @@ public class AddParkingLocation extends AppCompatActivity implements OnMapReadyC
 
     private void storeParking(String nameText) {
         LatLng target = map.getCameraPosition().target;
-        ParkingLocation parkingLocation = new ParkingLocation();
-        parkingLocation.setName(nameText);
-        parkingLocation.setLatitude(target.latitude);
-        parkingLocation.setLatitude(target.longitude);
+        ParkingLocation parkingLocation = new ParkingLocation(
+                nameText,
+                target.latitude,
+                target.longitude,
+                userService().getCurrentUserId()
+        );
+
+        ParkingService.getInstance()
+                .saveParkingLocation(parkingLocation)
+                .subscribe(pl -> ActivityNavigator.toOffer(this), e -> errorHelper(this).longToast(R.string.error_save_location, e));
     }
 
     @SuppressLint("MissingPermission")

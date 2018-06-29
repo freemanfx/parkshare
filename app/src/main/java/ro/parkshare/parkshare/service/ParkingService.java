@@ -2,6 +2,7 @@ package ro.parkshare.parkshare.service;
 
 import java.util.List;
 
+import ro.parkshare.parkshare.api.ParkingAPI;
 import ro.parkshare.parkshare.api.RestClient;
 import rx.Observable;
 
@@ -9,8 +10,12 @@ import static rx.schedulers.Schedulers.io;
 
 public class ParkingService {
     private static ParkingService instance;
+    private ParkingAPI api;
 
     private ParkingService() {
+        api = RestClient
+                .getInstance()
+                .parkingAPI();
     }
 
     public static ParkingService getInstance() {
@@ -21,13 +26,9 @@ public class ParkingService {
     }
 
     private Observable<List<ParkingLocation>> getAllParkingLocations(Long userId) {
-        Observable<List<ParkingLocation>> observable = RestClient
-                .getInstance()
-                .parkingAPI()
+        return api
                 .getAll(userId)
                 .subscribeOn(io());
-
-        return observable;
     }
 
     public Observable<List<ParkingLocation>> getParkingLocationsForCurrentUser() {
@@ -36,8 +37,7 @@ public class ParkingService {
     }
 
     public Observable<ParkingLocation> getParkingLocationById(Long parkingId) {
-        return ParkingService.getInstance()
-                .getParkingLocationsForCurrentUser()
+        return getParkingLocationsForCurrentUser()
                 .flatMapIterable(x -> x)
                 .filter(p -> p.getId().equals(parkingId))
                 .first();
@@ -47,6 +47,11 @@ public class ParkingService {
         //TODO: make api call
         return Observable
                 .just(offer)
+                .subscribeOn(io());
+    }
+
+    public Observable<ParkingLocation> saveParkingLocation(ParkingLocation parkingLocation) {
+        return api.save(parkingLocation)
                 .subscribeOn(io());
     }
 }
