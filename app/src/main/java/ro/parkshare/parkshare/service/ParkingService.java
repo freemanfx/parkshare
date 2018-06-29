@@ -2,6 +2,7 @@ package ro.parkshare.parkshare.service;
 
 import java.util.List;
 
+import retrofit2.Response;
 import ro.parkshare.parkshare.api.ParkingAPI;
 import ro.parkshare.parkshare.api.RestClient;
 import rx.Observable;
@@ -50,7 +51,7 @@ public class ParkingService {
                 .subscribeOn(io());
     }
 
-    public Observable<ParkingLocation> saveParkingLocation(ParkingLocation parkingLocation) {
+    public Observable<Response<Void>> saveParkingLocation(ParkingLocation parkingLocation) {
         return api.save(parkingLocation)
                 .subscribeOn(io());
     }

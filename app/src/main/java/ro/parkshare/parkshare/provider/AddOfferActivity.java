@@ -11,6 +11,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Response;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.ToastHelper;
@@ -90,7 +91,7 @@ public class AddOfferActivity extends AppCompatActivity {
                         e -> errorHelper(this).longToast(R.string.error_sending_data, e));
     }
 
-    private void offerSaved(Void response) {
+    private void offerSaved(Response<Void> response) {
         ToastHelper.of(this).show(getString(R.string.offer_added));
         finish();
     }

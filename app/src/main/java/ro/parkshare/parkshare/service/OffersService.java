@@ -28,12 +28,13 @@ public class OffersService {
     }
 
     public Observable<List<Offer>> getOffersForBounds(LatLngBounds bounds) {
-        //TODO: replace errorHelper proper api call
-        Observable<List<Offer>> observable = api
-                .getAll()
+        return api
+                .getOffersForBounds(
+                        bounds.southwest.latitude,
+                        bounds.southwest.longitude,
+                        bounds.northeast.latitude,
+                        bounds.northeast.longitude)
                 .subscribeOn(io());
-
-        return observable;
     }
 
     public Observable<List<Offer>> getOffersByParkingId(Long parkingId) {
@@ -42,9 +43,8 @@ public class OffersService {
                 .subscribeOn(io());
     }
 
-    public Observable<Void> saveOffer(Offer offer) {
+    public Observable<Response<Void>> saveOffer(Offer offer) {
         return api.saveOffer(offer)
-                .map(Response::body)
                 .subscribeOn(io());
     }
 }
