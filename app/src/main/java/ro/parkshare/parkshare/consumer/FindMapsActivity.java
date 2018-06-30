@@ -22,8 +22,8 @@ import ro.parkshare.parkshare.helper.PermissionHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 
+import static ro.parkshare.parkshare.BeanProvider.errorHelper;
 import static ro.parkshare.parkshare.Constants.INITIAL_POSITION;
-import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static ro.parkshare.parkshare.helper.PermissionHelper.RequestCode.LOCATION;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -66,7 +66,7 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
             OffersService.getInstance()
                     .getOffersForBounds(bounds)
                     .observeOn(mainThread())
-                    .subscribe(this::displayOffers, throwable -> errorHelper(this).longToast(R.string.error_retrieve_offers, throwable));
+                    .subscribe(this::displayOffers, throwable -> errorHelper().longToast(R.string.error_retrieve_offers, throwable));
         });
     }
 
@@ -75,7 +75,7 @@ public class FindMapsActivity extends FragmentActivity implements OnMapReadyCall
         MapHelper.displayOffers(offers, map)
                 .subscribe(marker -> {
                         },
-                        throwable -> errorHelper(this).longToast(R.string.error_adding_marker, throwable));
+                        throwable -> errorHelper().longToast(R.string.error_adding_marker, throwable));
     }
 
     @SuppressLint("MissingPermission")

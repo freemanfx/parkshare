@@ -7,17 +7,13 @@ import android.widget.Toast;
 
 import ro.parkshare.parkshare.ParkShareApp;
 
-public class ErrorHelperFactory {
+public class ErrorHelper {
     private static final String TAG = ParkShareApp.class.getName();
 
     private Context context;
 
-    private ErrorHelperFactory(Context context) {
+    public ErrorHelper(Context context) {
         this.context = context;
-    }
-
-    public static ErrorHelperFactory errorHelper(Context context) {
-        return new ErrorHelperFactory(context);
     }
 
     public void longToast(String message, Throwable throwable) {

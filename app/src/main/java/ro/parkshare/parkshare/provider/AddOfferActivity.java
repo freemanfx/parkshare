@@ -21,7 +21,7 @@ import ro.parkshare.parkshare.service.ParkingService;
 import ro.parkshare.parkshare.service.Validity;
 
 import static ro.parkshare.parkshare.BeanProvider.dateHelper;
-import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
+import static ro.parkshare.parkshare.BeanProvider.errorHelper;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class AddOfferActivity extends AppCompatActivity {
@@ -71,7 +71,7 @@ public class AddOfferActivity extends AppCompatActivity {
                     .observeOn(mainThread())
                     .subscribe(
                             this::onLocationRetrieved,
-                            e -> errorHelper(this).longToast(R.string.error_retrieve_data, e)
+                            e -> errorHelper().longToast(R.string.error_retrieve_data, e)
                     );
         }
 
@@ -96,6 +96,6 @@ public class AddOfferActivity extends AppCompatActivity {
     }
 
     private void onAddOfferError(Throwable throwable) {
-        errorHelper(this).longToast(R.string.error_sending_data, throwable);
+        errorHelper().longToast(R.string.error_sending_data, throwable);
     }
 }

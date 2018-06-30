@@ -34,4 +34,7 @@
     <string name="parking_duration">Parking duration</string>
     <string name="leave_parking">Leave parking</string>
     <string name="error_save_location">There was an error while trying to save parking</string>
+    <string name="leave_parking_dialog_message">Do you want to leave the parking?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

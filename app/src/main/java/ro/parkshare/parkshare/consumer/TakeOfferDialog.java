@@ -22,8 +22,8 @@ import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.Validity;
 
+import static ro.parkshare.parkshare.BeanProvider.errorHelper;
 import static ro.parkshare.parkshare.Constants.ServerErrors.OFFER_ALREADY_BOOKED;
-import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class TakeOfferDialog extends DialogFragment {
@@ -74,7 +74,7 @@ public class TakeOfferDialog extends DialogFragment {
             if (OFFER_ALREADY_BOOKED.equals(message)) {
                 ToastHelper.of(getActivity()).show(message);
             } else {
-                errorHelper(getActivity()).log(apiException);
+                errorHelper().log(apiException);
             }
         }
     }

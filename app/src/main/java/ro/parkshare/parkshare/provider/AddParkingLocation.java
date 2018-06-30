@@ -24,8 +24,8 @@ import ro.parkshare.parkshare.helper.PermissionHelper;
 import ro.parkshare.parkshare.service.ParkingLocation;
 import ro.parkshare.parkshare.service.ParkingService;
 
+import static ro.parkshare.parkshare.BeanProvider.errorHelper;
 import static ro.parkshare.parkshare.BeanProvider.userService;
-import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static ro.parkshare.parkshare.helper.PermissionHelper.RequestCode.LOCATION;
 
 public class AddParkingLocation extends AppCompatActivity implements OnMapReadyCallback {
@@ -83,7 +83,7 @@ public class AddParkingLocation extends AppCompatActivity implements OnMapReadyC
 
         ParkingService.getInstance()
                 .saveParkingLocation(parkingLocation)
-                .subscribe(pl -> ActivityNavigator.toOffer(this), e -> errorHelper(this).longToast(R.string.error_save_location, e));
+                .subscribe(pl -> ActivityNavigator.toOffer(this), e -> errorHelper().longToast(R.string.error_save_location, e));
     }
 
     @SuppressLint("MissingPermission")

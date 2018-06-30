@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import ro.parkshare.parkshare.helper.DateHelper;
+import ro.parkshare.parkshare.helper.ErrorHelper;
 import ro.parkshare.parkshare.user.UserService;
 
 public class BeanProvider {
@@ -11,6 +12,7 @@ public class BeanProvider {
     private static Context context;
     private static UserService userService;
     private static DateHelper dateHelper;
+    private static ErrorHelper errorHelper;
 
     public static void init(Context context) {
         BeanProvider.context = context;
@@ -28,5 +30,12 @@ public class BeanProvider {
             dateHelper = new DateHelper(context);
         }
         return dateHelper;
+    }
+
+    public static ErrorHelper errorHelper() {
+        if (errorHelper == null) {
+            errorHelper = new ErrorHelper(context);
+        }
+        return errorHelper;
     }
 }

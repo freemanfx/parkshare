@@ -33,4 +33,7 @@
     <string name="starting">Începand de la ora:</string>
     <string name="parking_duration">Timp staționare:</string>
     <string name="leave_parking">Eliberează locul</string>
+    <string name="leave_parking_dialog_message">Do you want to leave the parking?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
