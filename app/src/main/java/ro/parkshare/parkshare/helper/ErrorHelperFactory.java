@@ -29,4 +29,8 @@ public class ErrorHelperFactory {
         String message = context.getString(resId);
         longToast(message, throwable);
     }
+
+    public void log(Throwable throwable) {
+        Log.e(TAG, throwable.getMessage(), throwable);
+    }
 }

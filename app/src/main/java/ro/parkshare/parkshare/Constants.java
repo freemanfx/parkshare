@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public interface Constants {
     String MOCKED_API_URL = "https://demo5826679.mockable.io/";
-    String DEV_API_URL = "https://992dca09.ngrok.io/";
+    String DEV_API_URL = "https://021db1fa.ngrok.io";
 
     String SERVER_URL = DEV_API_URL;
 
@@ -12,4 +12,8 @@ public interface Constants {
     LatLng BUCURESTI_POSITION = new LatLng(44.4520456, 26.0853351);
 
     LatLng INITIAL_POSITION = BUCURESTI_POSITION;
+
+    interface ServerErrors {
+        String OFFER_ALREADY_BOOKED = "Offer is already booked!";
+    }
 }

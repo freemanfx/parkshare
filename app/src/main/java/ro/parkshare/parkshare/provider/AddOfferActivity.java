@@ -87,12 +87,15 @@ public class AddOfferActivity extends AppCompatActivity {
         OffersService.getInstance()
                 .addOffer(offer)
                 .observeOn(mainThread())
-                .subscribe(this::offerSaved,
-                        e -> errorHelper(this).longToast(R.string.error_sending_data, e));
+                .subscribe(this::offerSaved, this::onAddOfferError);
     }
 
     private void offerSaved(Response<Void> response) {
         ToastHelper.of(this).show(getString(R.string.offer_added));
         finish();
+    }
+
+    private void onAddOfferError(Throwable throwable) {
+        errorHelper(this).longToast(R.string.error_sending_data, throwable);
     }
 }

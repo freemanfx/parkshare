@@ -16,7 +16,7 @@ public interface OffersAPI {
     Observable<Response<Void>> addOffer(@Body Offer offer);
 
     @POST("offers/book/{offerId}/{userId}")
-    Observable<Response<ApiResponse>> bookOffer(@Path("offerId") Long offerId, @Path("userId") Long userId);
+    Observable<Response<Void>> bookOffer(@Path("offerId") Long offerId, @Path("userId") Long userId);
 
     @GET("offers/parking/{parkingId}")
     Observable<List<Offer>> getByParkingId(@Path("parkingId") Long parkingId);

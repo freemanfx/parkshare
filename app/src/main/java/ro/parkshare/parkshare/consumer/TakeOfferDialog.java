@@ -15,13 +15,14 @@ import butterknife.OnClick;
 import retrofit2.Response;
 import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
-import ro.parkshare.parkshare.api.ApiResponse;
+import ro.parkshare.parkshare.api.ApiException;
 import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.ToastHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.Validity;
 
+import static ro.parkshare.parkshare.Constants.ServerErrors.OFFER_ALREADY_BOOKED;
 import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -66,11 +67,19 @@ public class TakeOfferDialog extends DialogFragment {
                 .subscribe(this::onBookedSuccessfully, this::onBookError);
     }
 
-    private void onBookError(Throwable e) {
-        errorHelper(getContext()).longToast(R.string.error_sending_data, e);
+    private void onBookError(Throwable throwable) {
+        if (throwable instanceof ApiException) {
+            ApiException apiException = (ApiException) throwable;
+            String message = apiException.getMessage();
+            if (OFFER_ALREADY_BOOKED.equals(message)) {
+                ToastHelper.of(getActivity()).show(message);
+            } else {
+                errorHelper(getActivity()).log(apiException);
+            }
+        }
     }
 
-    private void onBookedSuccessfully(Response<ApiResponse> response) {
+    private void onBookedSuccessfully(Response<Void> response) {
         ActivityNavigator.carParked(getContext(), offer);
         dismiss();
         ToastHelper.of(getContext()).show(getString(R.string.booked_offer));

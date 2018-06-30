@@ -52,20 +52,22 @@ public class OffersService {
                 .subscribeOn(io());
     }
 
-    public Observable<Response<ApiResponse>> bookOffer(Offer offer) {
+    public Observable<Response<Void>> bookOffer(Offer offer) {
         return api.bookOffer(offer.getId(), userService().getCurrentUserId())
-                .map(this::throwExceptionIfUnsuccessful)
+                .map(response -> {
+                    throwExceptionIfUnsuccessful(response);
+                    return response;
+                })
                 .subscribeOn(io());
     }
 
-    private Response<ApiResponse> throwExceptionIfUnsuccessful(Response<ApiResponse> response) throws ApiException {
+    private void throwExceptionIfUnsuccessful(Response<Void> response) throws ApiException {
         try {
             if (!response.isSuccessful()) {
                 String errorBody = response.errorBody().string();
                 ApiResponse apiResponse = ApiResponse.fromBody(errorBody);
                 throw new ApiException(apiResponse.getMessage());
             }
-            return response;
         } catch (IOException e) {
             throw new ApiException(e);
         }
