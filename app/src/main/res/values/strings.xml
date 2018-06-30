@@ -23,8 +23,8 @@
     <string name="add_offer">Add offer</string>
     <string name="duration">Duration:</string>
     <string name="amount_minutes_format">%1$d minutes</string>
-    <string name="error_retrieve_data">There was an error while trying to retrieve data</string>
-    <string name="error_sending_data">There was an error while trying to send data</string>
+    <string name="error_retrieve_data">There was an error while trying to retrieve data: </string>
+    <string name="error_sending_data">There was an error while trying to send data: </string>
     <string name="offer_added">Offer has been added</string>
     <string name="cancel">Cancel</string>
     <string name="park_here">Park here</string>

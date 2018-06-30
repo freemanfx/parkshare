@@ -85,7 +85,7 @@ public class AddOfferActivity extends AppCompatActivity {
     public void onAddOfferButtonClicked() {
         Offer offer = new Offer(parkingLocation, new Validity(start, end));
         OffersService.getInstance()
-                .saveOffer(offer)
+                .addOffer(offer)
                 .observeOn(mainThread())
                 .subscribe(this::offerSaved,
                         e -> errorHelper(this).longToast(R.string.error_sending_data, e));

@@ -12,6 +12,15 @@ import rx.Observable;
 
 public interface OffersAPI {
 
+    @POST("offers")
+    Observable<Response<Void>> addOffer(@Body Offer offer);
+
+    @POST("offers/book/{offerId}/{userId}")
+    Observable<Response<ApiResponse>> bookOffer(@Path("offerId") Long offerId, @Path("userId") Long userId);
+
+    @GET("offers/parking/{parkingId}")
+    Observable<List<Offer>> getByParkingId(@Path("parkingId") Long parkingId);
+
     @GET("offers/bounds/{swLat}/{swLong}/{neLat}/{neLong}")
     Observable<List<Offer>> getOffersForBounds(
             @Path("swLat") double swLat,
@@ -20,13 +29,6 @@ public interface OffersAPI {
             @Path("neLong") double neLong
     );
 
-
     @GET("offers")
     Observable<List<Offer>> getAll();
-
-    @POST("offers")
-    Observable<Response<Void>> saveOffer(@Body Offer offer);
-
-    @GET("offers/parking/{parkingId}")
-    Observable<List<Offer>> getByParkingId(@Path("parkingId") Long parkingId);
 }

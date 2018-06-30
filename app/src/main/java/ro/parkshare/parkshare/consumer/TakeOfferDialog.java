@@ -12,12 +12,14 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Response;
 import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
+import ro.parkshare.parkshare.api.ApiResponse;
 import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.ToastHelper;
 import ro.parkshare.parkshare.service.Offer;
-import ro.parkshare.parkshare.service.ParkingService;
+import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.Validity;
 
 import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
@@ -58,7 +60,7 @@ public class TakeOfferDialog extends DialogFragment {
 
     @OnClick(R.id.park_here)
     public void onParkHereClick() {
-        ParkingService.getInstance()
+        OffersService.getInstance()
                 .bookOffer(offer)
                 .observeOn(mainThread())
                 .subscribe(this::onBookedSuccessfully, this::onBookError);
@@ -68,7 +70,7 @@ public class TakeOfferDialog extends DialogFragment {
         errorHelper(getContext()).longToast(R.string.error_sending_data, e);
     }
 
-    private void onBookedSuccessfully(Offer offer) {
+    private void onBookedSuccessfully(Response<ApiResponse> response) {
         ActivityNavigator.carParked(getContext(), offer);
         dismiss();
         ToastHelper.of(getContext()).show(getString(R.string.booked_offer));

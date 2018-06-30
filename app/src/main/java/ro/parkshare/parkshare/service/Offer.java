@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class Offer implements Serializable {
 
     @Expose
-    private Integer id;
+    private Long id;
     @Expose
     private ParkingLocation parking;
     @Expose
@@ -18,11 +18,11 @@ public class Offer implements Serializable {
         this.validity = validity;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

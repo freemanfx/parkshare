@@ -44,13 +44,6 @@ public class ParkingService {
                 .first();
     }
 
-    public Observable<Offer> bookOffer(Offer offer) {
-        //TODO: make api call
-        return Observable
-                .just(offer)
-                .subscribeOn(io());
-    }
-
     public Observable<Response<Void>> saveParkingLocation(ParkingLocation parkingLocation) {
         return api.save(parkingLocation)
                 .subscribeOn(io());
