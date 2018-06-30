@@ -18,6 +18,7 @@ public interface Constants {
     }
 
     interface DateFormats {
+        String JAVA_DATE_FORMAT_WITH_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ssZ";
         String SHORT_OFFER = "EEEE dd/MM HH:mm";
     }
 }
