@@ -18,10 +18,15 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Response;
+import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.DurationHelper;
+import ro.parkshare.parkshare.helper.ErrorHelperFactory;
 import ro.parkshare.parkshare.service.Offer;
+import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.ParkingLocation;
 
 public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -30,13 +35,13 @@ public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCa
     public static String OFFER = "OFFER";
 
     private Offer offer;
-    @BindView(R.id.starting_text)
-    TextView startingText;
-    @BindView(R.id.parking_duration_text)
-    TextView parkingDuration;
     private GoogleMap map;
     private Date startDate;
 
+    @BindView(R.id.parking_duration_text)
+    TextView parkingDuration;
+    @BindView(R.id.starting_text)
+    TextView startingText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,5 +96,22 @@ public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCa
         map.addMarker(markerOptions);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(parkingLocation.getLatLang(), 20.0f);
         map.moveCamera(cameraUpdate);
+    }
+
+    @OnClick(R.id.leave_parking)
+    public void onLeaveParking() {
+        OffersService
+                .getInstance()
+                .leaveOffer(offer)
+                .subscribe(this::onLeaveParkingSuccess, this::onLeaveParkingError);
+    }
+
+    private void onLeaveParkingSuccess(Response<Void> voidResponse) {
+        ActivityNavigator.toMain(this);
+
+    }
+
+    private void onLeaveParkingError(Throwable throwable) {
+        ErrorHelperFactory.errorHelper(this).longToast(R.string.error_sending_data, throwable);
     }
 }

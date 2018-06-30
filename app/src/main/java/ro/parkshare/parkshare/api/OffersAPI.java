@@ -31,4 +31,7 @@ public interface OffersAPI {
 
     @GET("offers")
     Observable<List<Offer>> getAll();
+
+    @POST("offers/unbook/{offerId}")
+    Observable<Response<Void>> leaveOffer(@Path("offerId") Long offerId);
 }

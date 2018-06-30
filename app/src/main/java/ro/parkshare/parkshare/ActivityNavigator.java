@@ -23,9 +23,9 @@ public class ActivityNavigator {
         startActivity(activity, ParkingLocationsActivity.class);
     }
 
-    private static void startActivity(AppCompatActivity activity, Class<?> activityClass) {
-        Intent intent = new Intent(activity, activityClass);
-        activity.startActivity(intent);
+    private static void startActivity(Context context, Class<?> activityClass) {
+        Intent intent = new Intent(context, activityClass);
+        context.startActivity(intent);
     }
 
     public static void addNewLocationActivity(AppCompatActivity activity) {
@@ -49,5 +49,11 @@ public class ActivityNavigator {
         Intent intent = new Intent(context, CarParkedActivity.class);
         intent.putExtra(CarParkedActivity.OFFER, offer);
         context.startActivity(intent);
+    }
+
+    public static void toMain(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(context, MainActivity.class);
     }
 }

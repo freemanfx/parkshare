@@ -54,22 +54,26 @@ public class OffersService {
 
     public Observable<Response<Void>> bookOffer(Offer offer) {
         return api.bookOffer(offer.getId(), userService().getCurrentUserId())
-                .map(response -> {
-                    throwExceptionIfUnsuccessful(response);
-                    return response;
-                })
+                .map(this::throwExceptionIfUnsuccessful)
                 .subscribeOn(io());
     }
 
-    private void throwExceptionIfUnsuccessful(Response<Void> response) throws ApiException {
+    private Response<Void> throwExceptionIfUnsuccessful(Response<Void> response) throws ApiException {
         try {
             if (!response.isSuccessful()) {
                 String errorBody = response.errorBody().string();
                 ApiResponse apiResponse = ApiResponse.fromBody(errorBody);
                 throw new ApiException(apiResponse.getMessage());
             }
+            return response;
         } catch (IOException e) {
             throw new ApiException(e);
         }
+    }
+
+    public Observable<Response<Void>> leaveOffer(Offer offer) {
+        return api.leaveOffer(offer.getId())
+                .map(this::throwExceptionIfUnsuccessful)
+                .subscribeOn(io());
     }
 }
