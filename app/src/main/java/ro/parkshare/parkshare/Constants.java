@@ -16,4 +16,8 @@ public interface Constants {
     interface ServerErrors {
         String OFFER_ALREADY_BOOKED = "Offer is already booked!";
     }
+
+    interface DateFormats {
+        String SHORT_OFFER = "EEEE dd/MM HH:mm";
+    }
 }

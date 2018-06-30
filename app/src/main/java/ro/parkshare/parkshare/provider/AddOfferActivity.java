@@ -13,7 +13,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Response;
 import ro.parkshare.parkshare.R;
-import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.ToastHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
@@ -21,6 +20,7 @@ import ro.parkshare.parkshare.service.ParkingLocation;
 import ro.parkshare.parkshare.service.ParkingService;
 import ro.parkshare.parkshare.service.Validity;
 
+import static ro.parkshare.parkshare.BeanProvider.dateHelper;
 import static ro.parkshare.parkshare.helper.ErrorHelperFactory.errorHelper;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -48,15 +48,15 @@ public class AddOfferActivity extends AppCompatActivity {
         setContentView(R.layout.add_offer_activity);
         ButterKnife.bind(this);
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = dateHelper().getCalendar();
         start = calendar.getTime();
 
         calendar.add(Calendar.HOUR, 1);
         end = calendar.getTime();
 
-        DateHelper dateHelper = new DateHelper(this);
-        from_text.setText(dateHelper.shortFormat(start));
-        to_text.setText(dateHelper.shortFormat(end));
+
+        from_text.setText(dateHelper().shortFormat(start));
+        to_text.setText(dateHelper().shortFormat(end));
 
         Validity validity = new Validity(start, end);
         String durationString = getResources().getString(R.string.amount_minutes_format, validity.minutes());

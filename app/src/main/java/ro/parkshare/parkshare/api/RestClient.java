@@ -13,7 +13,7 @@ import ro.parkshare.parkshare.Constants;
 
 public class RestClient {
     private static final String SERVER_BASE_URL = Constants.SERVER_URL;
-    private static final String JAVA_DATE_FORMAT_WITH_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ss";
+    private static final String JAVA_DATE_FORMAT_WITH_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ssZ";
 
     private static RestClient instance;
     private OffersAPI offersAPI;
