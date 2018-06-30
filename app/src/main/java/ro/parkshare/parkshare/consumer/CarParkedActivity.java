@@ -99,4 +99,9 @@ public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCa
         LeaveParkingDialog leaveParkingDialog = LeaveParkingDialog.newInstance(offer);
         leaveParkingDialog.show(getSupportFragmentManager(), "LeaveParkingDialog");
     }
+
+    @Override
+    public void onBackPressed() {
+        onLeaveParking();
+    }
 }
