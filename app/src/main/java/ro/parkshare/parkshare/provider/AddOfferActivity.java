@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Response;
 import ro.parkshare.parkshare.R;
+import ro.parkshare.parkshare.helper.DurationHelper;
 import ro.parkshare.parkshare.helper.ToastHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
@@ -84,8 +85,9 @@ public class AddOfferActivity extends AppCompatActivity implements DatePickerLis
         to_date_text.setText(dateHelper().justDate(end));
         to_time_text.setText(dateHelper().justTime(end));
 
-        Validity validity = new Validity(start, end);
-        String durationString = getResources().getString(R.string.amount_minutes_format, validity.minutes());
+        long millis = end.getTime() - start.getTime();
+
+        String durationString = DurationHelper.millisToHM(millis);
         duration_text.setText(durationString);
     }
 

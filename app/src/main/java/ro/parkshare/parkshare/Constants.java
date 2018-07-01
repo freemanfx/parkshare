@@ -7,7 +7,7 @@ public interface Constants {
     String DEV_API_URL = "https://637f18da.ngrok.io";
 
     //    String SERVER_URL = PROD_API_URL;
-    String SERVER_URL = DEV_API_URL;
+    String SERVER_URL = PROD_API_URL;
 
     LatLng IASI_POSITION = new LatLng(47.1731649, 27.5663222);
     LatLng BUCURESTI_POSITION = new LatLng(44.4520456, 26.0853351);
