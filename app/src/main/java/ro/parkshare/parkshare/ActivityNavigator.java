@@ -15,6 +15,12 @@ import ro.parkshare.parkshare.service.ParkingLocation;
 
 
 public class ActivityNavigator {
+    private final Context context;
+
+    public ActivityNavigator(Context context) {
+        this.context = context;
+    }
+
     public static void toFind(AppCompatActivity activity) {
         startActivity(activity, FindMapsActivity.class);
     }
@@ -53,7 +59,7 @@ public class ActivityNavigator {
         context.startActivity(intent);
     }
 
-    public static void toMain(Context context) {
+    public void toMain() {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);

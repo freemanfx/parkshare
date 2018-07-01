@@ -1,6 +1,8 @@
 package ro.parkshare.parkshare.user;
 
 
+import android.util.Log;
+
 import java.io.IOException;
 
 import retrofit2.Response;
@@ -16,6 +18,7 @@ import static rx.schedulers.Schedulers.io;
 
 public class UserService {
 
+    private static final String TAG = "UserService";
     private final UserAPI userAPI;
 
     private UserAuthentication userAuthentication = new UserAuthentication(1L, "auth-token");
@@ -49,6 +52,7 @@ public class UserService {
     }
 
     private void saveAuthentication(UserAuthentication userAuthentication) {
+        Log.d(TAG, "Save auth " + userAuthentication.toString());
         this.userAuthentication = userAuthentication;
     }
 
@@ -57,6 +61,7 @@ public class UserService {
     }
 
     public String getAuthToken() {
+        Log.d(TAG, "Get auth: " + userAuthentication.toString());
         return userAuthentication.getAuthToken();
     }
 }

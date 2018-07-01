@@ -16,6 +16,7 @@ public class BeanProvider {
     private static DateHelper dateHelper;
     private static ErrorHelper errorHelper;
     private static ParkingService parkingService;
+    private static ActivityNavigator activityNavigator;
 
     public static void init(Context context) {
         BeanProvider.context = context;
@@ -47,5 +48,12 @@ public class BeanProvider {
             parkingService = new ParkingService(RestClient.getInstance().parkingAPI(), userService());
         }
         return parkingService;
+    }
+
+    public static ActivityNavigator activityNavigator() {
+        if (activityNavigator == null) {
+            activityNavigator = new ActivityNavigator(context);
+        }
+        return activityNavigator;
     }
 }

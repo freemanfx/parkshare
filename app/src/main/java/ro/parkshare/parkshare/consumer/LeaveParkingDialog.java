@@ -7,11 +7,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import retrofit2.Response;
-import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 
+import static ro.parkshare.parkshare.BeanProvider.activityNavigator;
 import static ro.parkshare.parkshare.BeanProvider.errorHelper;
 
 public class LeaveParkingDialog extends DialogFragment {
@@ -48,7 +48,7 @@ public class LeaveParkingDialog extends DialogFragment {
 
     private void onLeaveParkingSuccess(Response<Void> voidResponse) {
         dismiss();
-        ActivityNavigator.toMain(getActivity());
+        activityNavigator().toMain();
     }
 
     private void onLeaveParkingError(Throwable throwable) {

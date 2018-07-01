@@ -35,4 +35,12 @@ public class UserAuthentication {
     public void setAuthToken(String authToken) {
         this.authToken = authToken;
     }
+
+    @Override
+    public String toString() {
+        return "UserAuthentication{" +
+                "userId=" + userId +
+                ", authToken='" + authToken + '\'' +
+                '}';
+    }
 }

@@ -8,10 +8,10 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.helper.ToastHelper;
 
+import static ro.parkshare.parkshare.BeanProvider.activityNavigator;
 import static ro.parkshare.parkshare.BeanProvider.userService;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         userService()
                 .login(username, password)
                 .observeOn(mainThread())
-                .subscribe((o) -> ActivityNavigator.toMain(this), this::onLoginError);
+                .subscribe((o) -> activityNavigator().toMain(), this::onLoginError);
     }
 
     private void onLoginError(Throwable throwable) {
