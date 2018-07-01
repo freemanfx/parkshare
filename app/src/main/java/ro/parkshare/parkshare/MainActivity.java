@@ -16,6 +16,6 @@ public class MainActivity extends AppCompatActivity {
         Button offerMode = findViewById(R.id.offerModeButton);
 
         findMode.setOnClickListener((View v) -> ActivityNavigator.toFind(this));
-        offerMode.setOnClickListener((View v) -> ActivityNavigator.toOffer(this));
+        offerMode.setOnClickListener((View v) -> ActivityNavigator.toParkingLocations(this));
     }
 }

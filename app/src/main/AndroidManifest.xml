@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".user.LoginActivity">
+        <activity
+            android:name=".user.LoginActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,8 +39,12 @@
             android:label="@string/title_activity_find_maps"></activity>
         <activity android:name=".provider.ParkingLocationsActivity" />
         <activity android:name=".provider.ManageParkingLocation" />
-        <activity android:name=".provider.AddParkingLocation" />
-        <activity android:name=".provider.AddOfferActivity" />
+        <activity
+            android:name=".provider.AddParkingLocation"
+            android:noHistory="true" />
+        <activity
+            android:name=".provider.AddOfferActivity"
+            android:noHistory="true" />
         <activity android:name=".consumer.CarParkedActivity" />
         <activity android:name=".MainActivity" />
 

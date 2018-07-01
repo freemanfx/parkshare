@@ -19,8 +19,10 @@ public class ActivityNavigator {
         startActivity(activity, FindMapsActivity.class);
     }
 
-    public static void toOffer(AppCompatActivity activity) {
-        startActivity(activity, ParkingLocationsActivity.class);
+    public static void toParkingLocations(AppCompatActivity activity) {
+        Intent intent = new Intent(activity, ParkingLocationsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
     }
 
     private static void startActivity(Context context, Class<?> activityClass) {
@@ -54,6 +56,6 @@ public class ActivityNavigator {
     public static void toMain(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(context, MainActivity.class);
+        context.startActivity(intent);
     }
 }

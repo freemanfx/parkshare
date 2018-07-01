@@ -83,7 +83,7 @@ public class AddParkingLocation extends AppCompatActivity implements OnMapReadyC
 
         parkingService()
                 .saveParkingLocation(parkingLocation)
-                .subscribe(pl -> ActivityNavigator.toOffer(this), e -> errorHelper().longToast(R.string.error_save_location, e));
+                .subscribe(pl -> ActivityNavigator.toParkingLocations(this), e -> errorHelper().longToast(R.string.error_save_location, e));
     }
 
     @SuppressLint("MissingPermission")
