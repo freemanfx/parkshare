@@ -22,6 +22,16 @@ public class DateHelper {
         return dateFormat.format(date);
     }
 
+    public String justDate(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat(Constants.DateFormats.JUST_DATE, getCurrentLocale());
+        return dateFormat.format(date);
+    }
+
+    public String justTime(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat(Constants.DateFormats.JUST_TIME, getCurrentLocale());
+        return dateFormat.format(date);
+    }
+
     private Locale getCurrentLocale() {
         return context.getResources().getConfiguration().locale;
     }

@@ -26,16 +26,25 @@
             android:text="@string/from" />
 
         <TextView
-            android:id="@+id/from_text"
-            style="@style/label"
+            android:id="@+id/from_date_text"
+            style="@style/offer_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="20 May 22:00" />
+            tools:text="20 May" />
+
+        <TextView
+            android:id="@+id/from_time_text"
+            style="@style/offer_date_label"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="22:00" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_padding"
         android:orientation="horizontal">
 
         <TextView
@@ -46,11 +55,19 @@
             android:text="@string/to" />
 
         <TextView
-            android:id="@+id/to_text"
-            style="@style/label"
+            android:id="@+id/to_date_text"
+            style="@style/offer_date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="21 May 08:00" />
+            tools:text="21 May" />
+
+        <TextView
+            android:id="@+id/to_time_text"
+            style="@style/offer_date_label"
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="08:00" />
     </LinearLayout>
 
     <LinearLayout
@@ -76,6 +93,7 @@
     <Button
         android:id="@+id/add_offer"
         style="@style/action_button"
+        android:layout_marginTop="@dimen/big_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_offer" />

@@ -55,6 +55,11 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="offer_date_label" parent="label">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
     <style name="offer_card_label" parent="label">
         <item name="android:textColor">@color/colorWhite</item>
     </style>

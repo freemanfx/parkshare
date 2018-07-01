@@ -22,17 +22,24 @@ import ro.parkshare.parkshare.service.Validity;
 import static ro.parkshare.parkshare.BeanProvider.dateHelper;
 import static ro.parkshare.parkshare.BeanProvider.errorHelper;
 import static ro.parkshare.parkshare.BeanProvider.parkingService;
+import static ro.parkshare.parkshare.provider.DatePickerFragment.instance;
+import static ro.parkshare.parkshare.provider.DatePickerListener.Type.TYPE_DATE_FROM;
+import static ro.parkshare.parkshare.provider.DatePickerListener.Type.TYPE_DATE_TO;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class AddOfferActivity extends AppCompatActivity {
+public class AddOfferActivity extends AppCompatActivity implements DatePickerListener {
 
     public static final String PARKING_ID = "PARKING_ID";
 
-    @BindView(R.id.from_text)
-    TextView from_text;
+    @BindView(R.id.from_date_text)
+    TextView from_date_text;
+    @BindView(R.id.from_time_text)
+    TextView from_time_text;
 
-    @BindView(R.id.to_text)
-    TextView to_text;
+    @BindView(R.id.to_date_text)
+    TextView to_date_text;
+    @BindView(R.id.to_time_text)
+    TextView to_time_text;
 
     @BindView(R.id.duration_text)
     TextView duration_text;
@@ -54,14 +61,7 @@ public class AddOfferActivity extends AppCompatActivity {
         calendar.add(Calendar.HOUR, 1);
         end = calendar.getTime();
 
-
-        from_text.setText(dateHelper().shortFormat(start));
-        to_text.setText(dateHelper().shortFormat(end));
-
-        Validity validity = new Validity(start, end);
-        String durationString = getResources().getString(R.string.amount_minutes_format, validity.minutes());
-        duration_text.setText(durationString);
-
+        updateDateTimeFields();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(PARKING_ID)) {
@@ -75,6 +75,18 @@ public class AddOfferActivity extends AppCompatActivity {
                     );
         }
 
+    }
+
+    private void updateDateTimeFields() {
+        from_date_text.setText(dateHelper().justDate(start));
+        from_time_text.setText(dateHelper().justTime(start));
+
+        to_date_text.setText(dateHelper().justDate(end));
+        to_time_text.setText(dateHelper().justTime(end));
+
+        Validity validity = new Validity(start, end);
+        String durationString = getResources().getString(R.string.amount_minutes_format, validity.minutes());
+        duration_text.setText(durationString);
     }
 
     private void onLocationRetrieved(ParkingLocation parkingLocation) {
@@ -97,5 +109,38 @@ public class AddOfferActivity extends AppCompatActivity {
 
     private void onAddOfferError(Throwable throwable) {
         errorHelper().longToast(R.string.error_sending_data, throwable);
+    }
+
+    @OnClick(R.id.from_date_text)
+    public void onFromDateClicked() {
+        DatePickerFragment instance = instance(TYPE_DATE_FROM, start);
+        instance.show(getSupportFragmentManager(), "FROM_DATE");
+    }
+
+    @OnClick(R.id.to_date_text)
+    public void onToDateClicked() {
+        DatePickerFragment instance = instance(TYPE_DATE_TO, start);
+        instance.show(getSupportFragmentManager(), "TO_DATE");
+    }
+
+    @Override
+    public void datePickerSelected(Type type, int year, int month, int day) {
+        if (type == TYPE_DATE_FROM) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(start);
+            calendar.set(year, month, day);
+
+            start = calendar.getTime();
+        }
+
+        if (type == TYPE_DATE_TO) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(end);
+            calendar.set(year, month, day);
+
+            end = calendar.getTime();
+        }
+
+        updateDateTimeFields();
     }
 }
