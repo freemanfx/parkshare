@@ -27,7 +27,10 @@ public class RestClient {
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .addInterceptor(new HeaderInterceptor())
+                .build();
 
         final Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.SERVER_URL)
                 .client(client)

@@ -1,6 +1,11 @@
 package ro.parkshare.parkshare.user;
 
 
+import java.io.IOException;
+
+import retrofit2.Response;
+import ro.parkshare.parkshare.api.ApiException;
+import ro.parkshare.parkshare.api.ApiResponse;
 import ro.parkshare.parkshare.api.LoginRequest;
 import ro.parkshare.parkshare.api.UserAPI;
 import ro.parkshare.parkshare.api.UserAuthentication;
@@ -24,9 +29,23 @@ public class UserService {
 
         return
                 loginObservable.flatMap(userAPI::login)
+                        .map(this::throwExceptionIfUnsuccessful)
+                        .map(Response::body)
                         .doOnNext(this::saveAuthentication)
                         .subscribeOn(io());
-//        return Observable.just(new UserAuthentication());
+    }
+
+    private Response<UserAuthentication> throwExceptionIfUnsuccessful(Response<UserAuthentication> response) throws ApiException {
+        try {
+            if (!response.isSuccessful()) {
+                String errorBody = response.errorBody().string();
+                ApiResponse apiResponse = ApiResponse.fromBody(errorBody);
+                throw new ApiException(apiResponse.getMessage());
+            }
+            return response;
+        } catch (IOException e) {
+            throw new ApiException(e);
+        }
     }
 
     private void saveAuthentication(UserAuthentication userAuthentication) {
@@ -35,5 +54,9 @@ public class UserService {
 
     public Long getCurrentUserId() {
         return userAuthentication.getUserId();
+    }
+
+    public String getAuthToken() {
+        return userAuthentication.getAuthToken();
     }
 }
