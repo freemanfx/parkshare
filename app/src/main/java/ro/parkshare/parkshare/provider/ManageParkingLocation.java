@@ -19,10 +19,10 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ro.parkshare.parkshare.ActivityNavigator;
+import ro.parkshare.parkshare.BeanProvider;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.ParkingLocation;
-import ro.parkshare.parkshare.service.ParkingService;
 
 import static java.util.Collections.emptyList;
 import static ro.parkshare.parkshare.BeanProvider.errorHelper;
@@ -72,7 +72,7 @@ public class ManageParkingLocation extends AppCompatActivity implements OnMapRea
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Long parkingId = extras.getLong(PARKING_ID);
-            ParkingService.getInstance()
+            BeanProvider.parkingService()
                     .getParkingLocationById(parkingId)
                     .observeOn(mainThread())
                     .subscribe(this::onLocationRetrieved, this::onErrorRetrievingParking);

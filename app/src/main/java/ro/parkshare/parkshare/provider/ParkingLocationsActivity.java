@@ -15,8 +15,9 @@ import java.util.List;
 import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.service.ParkingLocation;
-import ro.parkshare.parkshare.service.ParkingService;
+import rx.Subscription;
 
+import static ro.parkshare.parkshare.BeanProvider.parkingService;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class ParkingLocationsActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class ParkingLocationsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
     private ParkingLocationsAdapter adapter;
+    private Subscription parkingLocationsSubscription;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,11 +44,21 @@ public class ParkingLocationsActivity extends AppCompatActivity {
 
         adapter = new ParkingLocationsAdapter(new ArrayList<>(), this::onItemClickListener);
         recyclerView.setAdapter(adapter);
+    }
 
-        ParkingService.getInstance()
+    @Override
+    protected void onResume() {
+        super.onResume();
+        parkingLocationsSubscription = parkingService()
                 .getParkingLocationsForCurrentUser()
                 .observeOn(mainThread())
                 .subscribe(this::displayParkingLocations, this::onErrorParkingLocations);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        parkingLocationsSubscription.unsubscribe();
     }
 
     private void addNewParkingLocation(View view) {

@@ -4,26 +4,18 @@ import java.util.List;
 
 import retrofit2.Response;
 import ro.parkshare.parkshare.api.ParkingAPI;
-import ro.parkshare.parkshare.api.RestClient;
+import ro.parkshare.parkshare.user.UserService;
 import rx.Observable;
 
 import static rx.schedulers.Schedulers.io;
 
 public class ParkingService {
-    private static ParkingService instance;
-    private ParkingAPI api;
+    private final UserService userService;
+    private final ParkingAPI api;
 
-    private ParkingService() {
-        api = RestClient
-                .getInstance()
-                .parkingAPI();
-    }
-
-    public static ParkingService getInstance() {
-        if (instance == null) {
-            instance = new ParkingService();
-        }
-        return instance;
+    public ParkingService(ParkingAPI api, UserService userService) {
+        this.api = api;
+        this.userService = userService;
     }
 
     private Observable<List<ParkingLocation>> getAllParkingLocations(Long userId) {
@@ -33,8 +25,7 @@ public class ParkingService {
     }
 
     public Observable<List<ParkingLocation>> getParkingLocationsForCurrentUser() {
-        long userId = 1L;
-        return getAllParkingLocations(userId);
+        return getAllParkingLocations(userService.getCurrentUserId());
     }
 
     public Observable<ParkingLocation> getParkingLocationById(Long parkingId) {

@@ -22,9 +22,9 @@ import ro.parkshare.parkshare.ActivityNavigator;
 import ro.parkshare.parkshare.R;
 import ro.parkshare.parkshare.helper.PermissionHelper;
 import ro.parkshare.parkshare.service.ParkingLocation;
-import ro.parkshare.parkshare.service.ParkingService;
 
 import static ro.parkshare.parkshare.BeanProvider.errorHelper;
+import static ro.parkshare.parkshare.BeanProvider.parkingService;
 import static ro.parkshare.parkshare.BeanProvider.userService;
 import static ro.parkshare.parkshare.helper.PermissionHelper.RequestCode.LOCATION;
 
@@ -81,7 +81,7 @@ public class AddParkingLocation extends AppCompatActivity implements OnMapReadyC
                 userService().getCurrentUserId()
         );
 
-        ParkingService.getInstance()
+        parkingService()
                 .saveParkingLocation(parkingLocation)
                 .subscribe(pl -> ActivityNavigator.toOffer(this), e -> errorHelper().longToast(R.string.error_save_location, e));
     }

@@ -17,11 +17,11 @@ import ro.parkshare.parkshare.helper.ToastHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.OffersService;
 import ro.parkshare.parkshare.service.ParkingLocation;
-import ro.parkshare.parkshare.service.ParkingService;
 import ro.parkshare.parkshare.service.Validity;
 
 import static ro.parkshare.parkshare.BeanProvider.dateHelper;
 import static ro.parkshare.parkshare.BeanProvider.errorHelper;
+import static ro.parkshare.parkshare.BeanProvider.parkingService;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class AddOfferActivity extends AppCompatActivity {
@@ -66,7 +66,7 @@ public class AddOfferActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.containsKey(PARKING_ID)) {
             Long parkingId = extras.getLong(PARKING_ID);
-            ParkingService.getInstance()
+            parkingService()
                     .getParkingLocationById(parkingId)
                     .observeOn(mainThread())
                     .subscribe(
