@@ -27,7 +27,7 @@ import static ro.parkshare.parkshare.provider.DatePickerListener.Type.TYPE_DATE_
 import static ro.parkshare.parkshare.provider.DatePickerListener.Type.TYPE_DATE_TO;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
-public class AddOfferActivity extends AppCompatActivity implements DatePickerListener {
+public class AddOfferActivity extends AppCompatActivity implements DatePickerListener, TimePickerListener {
 
     public static final String PARKING_ID = "PARKING_ID";
 
@@ -123,6 +123,18 @@ public class AddOfferActivity extends AppCompatActivity implements DatePickerLis
         instance.show(getSupportFragmentManager(), "TO_DATE");
     }
 
+    @OnClick(R.id.from_time_text)
+    public void onFromTimeClicked() {
+        TimePickerFragment instance = TimePickerFragment.instance(TimeType.START, start);
+        instance.show(getSupportFragmentManager(), "FROM_TIME");
+    }
+
+    @OnClick(R.id.to_time_text)
+    public void onToTimeClicked() {
+        TimePickerFragment instance = TimePickerFragment.instance(TimeType.END, end);
+        instance.show(getSupportFragmentManager(), "FROM_TIME");
+    }
+
     @Override
     public void datePickerSelected(Type type, int year, int month, int day) {
         if (type == TYPE_DATE_FROM) {
@@ -137,6 +149,29 @@ public class AddOfferActivity extends AppCompatActivity implements DatePickerLis
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(end);
             calendar.set(year, month, day);
+
+            end = calendar.getTime();
+        }
+
+        updateDateTimeFields();
+    }
+
+    @Override
+    public void timePickerSelected(TimeType type, int hourOfDay, int minute) {
+        if (type == TimeType.START) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(start);
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendar.set(Calendar.MINUTE, minute);
+
+            start = calendar.getTime();
+        }
+
+        if (type == TimeType.END) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(end);
+            calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calendar.set(Calendar.MINUTE, minute);
 
             end = calendar.getTime();
         }
