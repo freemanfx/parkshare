@@ -16,6 +16,7 @@ public class RestClient {
     private static RestClient instance;
     private OffersAPI offersAPI;
     private ParkingAPI parkingAPI;
+    private UserAPI userAPI;
 
     private RestClient() {
         final Gson gson =
@@ -35,6 +36,7 @@ public class RestClient {
                 .build();
         offersAPI = retrofit.create(OffersAPI.class);
         parkingAPI = retrofit.create(ParkingAPI.class);
+        userAPI = retrofit.create(UserAPI.class);
     }
 
     public static RestClient getInstance() {
@@ -50,5 +52,9 @@ public class RestClient {
 
     public ParkingAPI parkingAPI() {
         return parkingAPI;
+    }
+
+    public UserAPI userAPI() {
+        return userAPI;
     }
 }

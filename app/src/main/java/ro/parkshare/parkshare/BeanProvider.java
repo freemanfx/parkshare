@@ -3,6 +3,7 @@ package ro.parkshare.parkshare;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import ro.parkshare.parkshare.api.RestClient;
 import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.ErrorHelper;
 import ro.parkshare.parkshare.user.UserService;
@@ -20,7 +21,7 @@ public class BeanProvider {
 
     public static UserService userService() {
         if (userService == null) {
-            userService = new UserService();
+            userService = new UserService(RestClient.getInstance().userAPI());
         }
         return userService;
     }
