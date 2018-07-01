@@ -15,6 +15,7 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,11 +25,18 @@ import ro.parkshare.parkshare.helper.DateHelper;
 import ro.parkshare.parkshare.helper.DurationHelper;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.ParkingLocation;
+import rx.Subscription;
+
+import static rx.Observable.interval;
+import static rx.android.schedulers.AndroidSchedulers.mainThread;
 
 public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    public static final String PARKING_START_DATE = "PARKING_START_DATE";
     public static String OFFER = "OFFER";
+
+    private static final String PARKING_START_DATE = "PARKING_START_DATE";
+    private static final int INITIAL_DELAY = 0;
+    private static final int PERIOD = 1;
 
     private Offer offer;
     private GoogleMap map;
@@ -38,6 +46,8 @@ public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCa
     TextView parkingDuration;
     @BindView(R.id.starting_text)
     TextView startingText;
+
+    private Subscription updateDurationSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,9 +67,30 @@ public class CarParkedActivity extends AppCompatActivity implements OnMapReadyCa
         startingText.setText(dateHelper.shortFormat(startDate));
 
         long duration = new Date().getTime() - startDate.getTime();
-        parkingDuration.setText(DurationHelper.milisToString(duration));
+        parkingDuration.setText(DurationHelper.millisToString(duration));
 
         setupGoogleMaps();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDurationEveryMinute();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateDurationSubscription.unsubscribe();
+    }
+
+    public void updateDurationEveryMinute() {
+        updateDurationSubscription = interval(INITIAL_DELAY, PERIOD, TimeUnit.SECONDS)
+                .observeOn(mainThread())
+                .subscribe(aLong -> {
+                    long duration = new Date().getTime() - startDate.getTime();
+                    parkingDuration.setText(DurationHelper.millisToString(duration));
+                });
     }
 
     @Override

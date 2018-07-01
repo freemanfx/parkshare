@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public interface Constants {
     String MOCKED_API_URL = "https://demo5826679.mockable.io/";
-    String DEV_API_URL = "https://021db1fa.ngrok.io";
+    String DEV_API_URL = "https://4b91a29c.ngrok.io";
 
     String SERVER_URL = DEV_API_URL;
 
