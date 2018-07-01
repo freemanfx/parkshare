@@ -8,12 +8,27 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+    </style>
+
+    <style name="AppTheme.RoundedCornerMaterialButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/rounded_shape</item>
     </style>
 
     <style name="mainBtn" parent="Widget.AppCompat.Button.Colored">
         <item name="android:textSize">20sp</item>
         <item name="android:padding">20dp</item>
         <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="loginBtn" parent="mainBtn">
+        <item name="android:background">@drawable/rounded_shape</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="loginEditText" parent="editText">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="leave_parking_button" parent="mainBtn">
@@ -56,4 +71,7 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <color name="colorTransparentGrey">#d2424242</color>
+    <color name="colorTransparentWhite">#2effffff</color>
 </resources>

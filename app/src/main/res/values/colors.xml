@@ -7,4 +7,5 @@
     <color name="colorBackground">#efefef</color>
 
     <color name="colorWhite">#fff</color>
+    <color name="colorDarkBlue">#0277bd</color>
 </resources>
