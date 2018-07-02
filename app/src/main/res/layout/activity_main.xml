@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="60dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="60dp"
-    android:weightSum="4"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/findModeButton"
-        style="@style/mainBtn"
-        android:layout_marginBottom="100dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginTop="100dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/find_parking_spot" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <Button
-        android:id="@+id/offerModeButton"
-        style="@style/mainBtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/offer_parking_spot" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="60dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="60dp"
+        android:weightSum="4"
+        tools:context=".MainActivity">
 
+        <Button
+            android:id="@+id/findModeButton"
+            style="@style/mainBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="100dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/find_parking_spot" />
+
+        <Button
+            android:id="@+id/offerModeButton"
+            style="@style/mainBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/offer_parking_spot" />
+
+    </LinearLayout>
 </LinearLayout>

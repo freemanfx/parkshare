@@ -61,6 +61,7 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
+            android:theme="@style/ToolbarAppTheme"
             android:name=".MainActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />

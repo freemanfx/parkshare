@@ -33,7 +33,7 @@
     <string name="starting">Starting from:</string>
     <string name="parking_duration">Parking duration</string>
     <string name="leave_parking">Leave parking</string>
-    <string name="error_save_location">There was an error while trying to save parking</string>
+    <string name="error_save_location">"There was an error while trying to save parking: "</string>
     <string name="leave_parking_dialog_message">Do you want to leave the parking?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -41,4 +41,7 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="login_error_message">Login error: </string>
+    <string name="action_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="confirm_logout">Do you want to logout?</string>
 </resources>

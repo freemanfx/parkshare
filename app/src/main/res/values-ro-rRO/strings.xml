@@ -39,5 +39,9 @@
     <string name="login">Autentificare</string>
     <string name="password">Parolă</string>
     <string name="username">Utilizator</string>
-    <string name="login_error_message">Eroare de login: </string>
+    <string name="login_error_message">Eroare de autentificare: </string>
+    <string name="error_save_location">"A apărut o eroare la salvarea parcării: "</string>
+    <string name="action_settings">Setări</string>
+    <string name="logout">Deconectare</string>
+    <string name="confirm_logout">Doriți să vă deconectați?</string>
 </resources>

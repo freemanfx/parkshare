@@ -12,6 +12,7 @@ import ro.parkshare.parkshare.provider.ManageParkingLocation;
 import ro.parkshare.parkshare.provider.ParkingLocationsActivity;
 import ro.parkshare.parkshare.service.Offer;
 import ro.parkshare.parkshare.service.ParkingLocation;
+import ro.parkshare.parkshare.user.LoginActivity;
 
 
 public class ActivityNavigator {
@@ -61,6 +62,12 @@ public class ActivityNavigator {
 
     public void toMain() {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(intent);
+    }
+
+    public void toLogin() {
+        Intent intent = new Intent(context, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         context.startActivity(intent);
     }
