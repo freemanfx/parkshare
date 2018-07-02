@@ -26,9 +26,10 @@ public class DurationHelper {
 
         if (hours > 0) {
             long remainingMinutes = minutes % MINUTES_IN_AN_HOUR;
-            return "" + hours + "h " + remainingMinutes + " min.";
+            String minutesString = remainingMinutes > 0 ? remainingMinutes + " min." : "";
+            return hours + "h " + minutesString;
         } else {
-            return minutes + "min. ";
+            return minutes + " min.";
         }
     }
 }
