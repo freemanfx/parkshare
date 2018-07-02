@@ -37,7 +37,7 @@ public class Validity implements Serializable {
         this.end = end;
     }
 
-    public int minutes() {
+    public long minutes() {
         Date currentDate = new Date();
         boolean currentAfterEnd = currentDate.after(end);
         boolean currentAfterStart = currentDate.after(start);
@@ -51,7 +51,7 @@ public class Validity implements Serializable {
         }
     }
 
-    private int millisToMinutes(long milliseconds) {
-        return (int) milliseconds / MILLIS_IN_A_MINUTE;
+    private long millisToMinutes(long milliseconds) {
+        return milliseconds / MILLIS_IN_A_MINUTE;
     }
 }

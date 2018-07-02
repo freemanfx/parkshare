@@ -6,7 +6,6 @@ public interface Constants {
     String PROD_API_URL = "http://ec2-18-185-48-244.eu-central-1.compute.amazonaws.com:8080";
     String DEV_API_URL = "https://637f18da.ngrok.io";
 
-    //    String SERVER_URL = PROD_API_URL;
     String SERVER_URL = PROD_API_URL;
 
     LatLng IASI_POSITION = new LatLng(47.1731649, 27.5663222);
