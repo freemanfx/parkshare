@@ -14,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
             android:name=".user.LoginActivity"
             android:noHistory="true">
             <intent-filter>
@@ -36,17 +38,32 @@
 
         <activity
             android:name=".consumer.FindMapsActivity"
-            android:label="@string/title_activity_find_maps"></activity>
-        <activity android:name=".provider.ParkingLocationsActivity" />
+            android:configChanges="orientation"
+            android:label="@string/title_activity_find_maps"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".provider.ParkingLocationsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
         <activity android:name=".provider.ManageParkingLocation" />
         <activity
             android:name=".provider.AddParkingLocation"
-            android:noHistory="true" />
+            android:configChanges="orientation"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".provider.AddOfferActivity"
-            android:noHistory="true" />
-        <activity android:name=".consumer.CarParkedActivity" />
-        <activity android:name=".MainActivity" />
+            android:configChanges="orientation"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".consumer.CarParkedActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
 
         <uses-library
             android:name="org.apache.http.legacy"
